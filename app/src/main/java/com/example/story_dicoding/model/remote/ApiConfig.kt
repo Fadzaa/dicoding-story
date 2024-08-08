@@ -13,7 +13,7 @@ class ApiConfig {
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
                 val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "Token "  + BuildConfig.API_KEY)
+                    .addHeader("Authorization", "Bearer "  + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXk5SVlLZ180WXNOWXBsSkwiLCJpYXQiOjE3MjMwODUyMDl9.i7cwFbuEQGN-YfiHm2iOQAjHaJAXODYUcow6bunYgGc")
                     .build()
                 chain.proceed(requestHeaders)
             }
@@ -24,7 +24,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl("https://story-api.dicoding.dev/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
