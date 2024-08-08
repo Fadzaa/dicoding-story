@@ -8,6 +8,7 @@
     tools:context=".view.activity.MainActivity">
 
     <TextView
+        android:id="@+id/helloWorldTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -15,5 +16,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/helloWorldTextView"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnLogin"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/btnNavigateToAllStory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Navigate To All Story"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnRegister"
+        android:layout_marginTop="20dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,25 +1,23 @@
 package com.example.story_dicoding.view.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.story_dicoding.R
-import com.example.story_dicoding.databinding.ActivityMainBinding
-import com.example.story_dicoding.viewmodel.AuthViewModel
+import com.example.story_dicoding.databinding.ActivityTestStoryBinding
+import com.example.story_dicoding.viewmodel.StoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class TestStoryActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTestStoryBinding
 
-    private val authViewModel: AuthViewModel by viewModel()
+    private val storyViewModel: StoryViewModel by viewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-
+        binding = ActivityTestStoryBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
@@ -29,17 +27,10 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        binding.btnLogin.setOnClickListener {
-            authViewModel.loginUser("fattah77@gmail.com", "fattah123")
+        storyViewModel.allStory.observe(this) {
+            binding.testAllStoryResponse.text = it.toString()
         }
 
-        binding.btnRegister.setOnClickListener {
-            authViewModel.registerUser("test@gmail.com", "test123", "Test User")
-        }
 
-        binding.btnNavigateToAllStory.setOnClickListener{
-            val intent = Intent(this, TestStoryActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
