@@ -1,6 +1,9 @@
 package com.example.story_dicoding.model.remote
 
+import com.example.story_dicoding.model.preferences.SettingPreferences
 import de.hdodenhof.circleimageview.BuildConfig
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -9,11 +12,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-        fun getApiService(): ApiService {
+        fun getApiService(pref: SettingPreferences): ApiService {
             val authInterceptor = Interceptor { chain ->
                 val req = chain.request()
+                val token = runBlocking { pref.getToken().first() }
                 val requestHeaders = req.newBuilder()
-                    .addHeader("Authorization", "Bearer "  + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyLXk5SVlLZ180WXNOWXBsSkwiLCJpYXQiOjE3MjMwODUyMDl9.i7cwFbuEQGN-YfiHm2iOQAjHaJAXODYUcow6bunYgGc")
+                    .addHeader("Authorization", "Bearer $token")
                     .build()
                 chain.proceed(requestHeaders)
             }

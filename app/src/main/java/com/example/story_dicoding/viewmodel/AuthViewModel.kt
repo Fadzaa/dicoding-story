@@ -2,7 +2,6 @@ package com.example.story_dicoding.viewmodel
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +10,7 @@ import com.example.story_dicoding.model.preferences.SettingPreferences
 import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.remote.response.LoginResponse
 import com.example.story_dicoding.model.repository.AuthRepository
-import com.example.story_dicoding.view.activity.TestStoryActivity
+import com.example.story_dicoding.view.activity.ListStoryActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -25,7 +24,10 @@ class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun registerUser(email: String, password: String, name: String) {
-        authRepository.registerUser(email, password, name)
+        _isLoading.value = true
+        authRepository.registerUser(email, password, name).observeForever {
+            _isLoading.value = false
+        }
     }
 
     fun loginUser(email: String, password: String): LiveData<LoginResponse> {
@@ -47,7 +49,7 @@ class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences
             val token = pref.getToken().first()
 
             if (token != null) {
-                val intent = Intent(activity, TestStoryActivity::class.java)
+                val intent = Intent(activity, ListStoryActivity::class.java)
                 activity.startActivity(intent)
             }
         }

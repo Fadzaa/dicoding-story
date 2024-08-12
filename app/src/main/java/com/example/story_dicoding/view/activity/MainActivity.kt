@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.story_dicoding.databinding.ActivityMainBinding
+import com.example.story_dicoding.helper.setLoading
 import com.example.story_dicoding.viewmodel.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,11 +25,7 @@ class MainActivity : AppCompatActivity() {
         authViewModel.checkUserTokenPreferences(this)
 
         authViewModel.isLoading.observe(this) {
-            if (it) {
-                binding.progressBar.visibility = View.VISIBLE
-            } else {
-                binding.progressBar.visibility = View.GONE
-            }
+            binding.progressBar.setLoading(it)
         }
 
         binding.btnLogin.setOnClickListener {
@@ -38,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
                     Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
 
-                    val intent = Intent(this, TestStoryActivity::class.java)
+                    val intent = Intent(this, ListStoryActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
