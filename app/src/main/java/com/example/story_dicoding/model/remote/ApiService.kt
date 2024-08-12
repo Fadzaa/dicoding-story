@@ -54,7 +54,7 @@ interface ApiService {
 
     @GET("stories/{id}")
     fun getDetailStory(
-        @Path("id") id: Int,
+        @Path("id") id: String,
     ): Call<DetailStoryResponse>
 
 

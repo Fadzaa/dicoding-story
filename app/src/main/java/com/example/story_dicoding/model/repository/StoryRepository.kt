@@ -40,7 +40,7 @@ class StoryRepository(private val apiService: ApiService) {
     fun getStoryById(id: String): LiveData<DetailStoryResponse> {
         val detailStoryResponse = MutableLiveData<DetailStoryResponse>()
 
-        apiService.getDetailStory(id.toInt()).enqueue(
+        apiService.getDetailStory(id).enqueue(
             object : Callback<DetailStoryResponse> {
                 override fun onResponse(
                     call: Call<DetailStoryResponse>,
