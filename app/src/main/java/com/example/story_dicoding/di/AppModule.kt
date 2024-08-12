@@ -1,5 +1,7 @@
 package com.example.story_dicoding.di
 
+import com.example.story_dicoding.model.preferences.SettingPreferences
+import com.example.story_dicoding.model.preferences.dataStore
 import com.example.story_dicoding.model.remote.ApiConfig
 import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.viewmodel.AuthViewModel
@@ -13,7 +15,7 @@ val appModule = module {
         ApiConfig.getApiService()
     }
 
-    viewModel { AuthViewModel(get()) }
+    viewModel { AuthViewModel(get(), SettingPreferences.getInstance(androidApplication().dataStore)) }
     viewModel { StoryViewModel(get()) }
 //    viewModel { ThemeViewModel(SettingPreferences.getInstance(androidApplication().dataStore)) }
 //    factory { (username: String) -> RepositoryViewModel(username, get()) }
