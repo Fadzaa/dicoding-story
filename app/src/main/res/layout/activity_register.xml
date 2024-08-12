@@ -5,10 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.MainActivity"
-    android:padding="20dp"
-    >
-
+    tools:context=".view.activity.RegisterActivity"
+    android:padding="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,50 +17,63 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <EditText
-            android:id="@+id/ed_login_email"
-            android:hint="Enter your email"
+            android:id="@+id/ed_register_name"
+            android:hint="Enter your password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
             />
 
         <EditText
-            android:id="@+id/ed_login_password"
+            android:id="@+id/ed_register_email"
+            android:hint="Enter your email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_register_name"
+            android:layout_marginTop="30dp"
+            />
+
+
+
+        <EditText
+            android:id="@+id/ed_register_password"
             android:hint="Enter your password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ed_login_email"
+            app:layout_constraintTop_toBottomOf="@id/ed_register_email"
             android:layout_marginTop="30dp"
             />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_hide_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Hide Password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ed_login_password"
+            app:layout_constraintTop_toBottomOf="@id/btn_register"
+            android:layout_marginTop="30dp"
+            />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ed_register_password"
             android:layout_marginTop="30dp"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

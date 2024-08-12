@@ -7,13 +7,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.story_dicoding.R
 import com.example.story_dicoding.databinding.ActivityTestStoryBinding
+import com.example.story_dicoding.viewmodel.AuthViewModel
 import com.example.story_dicoding.viewmodel.StoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TestStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTestStoryBinding
 
-    private val storyViewModel: StoryViewModel by viewModel()
+    private val storyViewModel: StoryViewModel by viewModel<StoryViewModel>()
+
+    val authViewModel: AuthViewModel by viewModel<AuthViewModel>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +32,13 @@ class TestStoryActivity : AppCompatActivity() {
 
         storyViewModel.allStory.observe(this) {
             binding.testAllStoryResponse.text = it.toString()
+        }
+
+
+
+
+        binding.btnLogout.setOnClickListener {
+            authViewModel.logoutUser()
         }
 
 

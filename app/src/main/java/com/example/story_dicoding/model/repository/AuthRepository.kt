@@ -59,7 +59,7 @@ class AuthRepository(private val apiService: ApiService) {
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<LoginResponse>, t: Throwable) {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })
