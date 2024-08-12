@@ -12,7 +12,7 @@ import org.koin.dsl.module
 
 val appModule = module {
     single<ApiService> {
-        ApiConfig.getApiService()
+        ApiConfig.getApiService(SettingPreferences.getInstance(androidApplication().dataStore))
     }
 
     viewModel { AuthViewModel(get(), SettingPreferences.getInstance(androidApplication().dataStore)) }

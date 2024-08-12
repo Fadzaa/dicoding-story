@@ -25,7 +25,10 @@ class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun registerUser(email: String, password: String, name: String) {
-        authRepository.registerUser(email, password, name)
+        _isLoading.value = true
+        authRepository.registerUser(email, password, name).observeForever {
+            _isLoading.value = false
+        }
     }
 
     fun loginUser(email: String, password: String): LiveData<LoginResponse> {

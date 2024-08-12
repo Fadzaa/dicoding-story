@@ -13,28 +13,33 @@ import com.example.story_dicoding.model.repository.StoryRepository
 class StoryViewModel(apiService: ApiService): ViewModel() {
     private val storyRepository = StoryRepository(apiService)
 
-    private val _allStory = MutableLiveData<AllStoryResponse>()
-    val allStory: LiveData<AllStoryResponse> = _allStory
+    private val _allStory = MutableLiveData<List<Story>>()
+    val allStory: LiveData<List<Story>> = _allStory
 
-    private val _story = MutableLiveData<DetailStoryResponse>()
-    val story: LiveData<DetailStoryResponse> = _story
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+//    private val _story = MutableLiveData<DetailStoryResponse>()
+//    val story: LiveData<DetailStoryResponse> = _story
 
     init {
         getAllStory()
-        getStoryById("1")
     }
 
     private fun getAllStory() {
-        storyRepository.getAllStory().observeForever {
-            _allStory.value = it
+        _isLoading.value = true
+
+        storyRepository.getAllStory().observeForever {response ->
+            _allStory.value = response.listStory
+            _isLoading.value = false
         }
     }
 
-    private fun getStoryById(id: String) {
-        storyRepository.getStoryById(id).observeForever {
-            _story.value = it
-        }
-    }
+//    fun getStoryById(id: String) {
+//        storyRepository.getStoryById(id).observeForever {
+//            _story.value = it
+//        }
+//    }
 
 
 }

@@ -5,37 +5,29 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.TestStoryActivity">
+    tools:context=".view.activity.TestStoryActivity"
+    android:padding="20dp"
+    >
 
-    <TextView
-        android:id="@+id/testAllStoryResponse"
+    <ProgressBar
+        android:id="@+id/progress_bar_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test All Story Response"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <TextView
-        android:id="@+id/testDetailStoryResponse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test Detail Story Response"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_story"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/testAllStoryResponse"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         />
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEST LOGOUT"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/testDetailStoryResponse"
-        android:layout_marginTop="50dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
