@@ -4,11 +4,18 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.story_dicoding.model.remote.ApiService
+import com.example.story_dicoding.model.remote.response.AddStoryResponse
 import com.example.story_dicoding.model.remote.response.AllStoryResponse
 import com.example.story_dicoding.model.remote.response.DetailStoryResponse
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class StoryRepository(private val apiService: ApiService) {
 
@@ -61,6 +68,43 @@ class StoryRepository(private val apiService: ApiService) {
 
         return detailStoryResponse
     }
+
+    fun addStoryGuest(
+        file: File,
+        description: String,
+        lat: Float,
+        lon: Float,
+    ) {
+        if (!file.exists()) {
+            Log.e(TAG, "File does not exist: ${file.path}")
+            return
+        }
+
+        val descriptionReq = description.toRequestBody("text/plain".toMediaType())
+        val latReq = lat.toString().toRequestBody("text/plain".toMediaType())
+        val lonReq = lon.toString().toRequestBody("text/plain".toMediaType())
+
+        val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
+
+        apiService.addStoryGuest(imageMultipart,descriptionReq, latReq, lonReq).enqueue(
+            object : Callback<AddStoryResponse> {
+                override fun onResponse(
+                    call: Call<AddStoryResponse>,
+                    response: Response<AddStoryResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d(TAG, "onResponse: ${response.body().toString()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<AddStoryResponse>, t: Throwable) {
+                    Log.e(TAG, "onFailure: ${t.message.toString()}")
+                }
+            }
+        )
+    }
+
 
     companion object {
         private const val TAG = "StoryRepository"

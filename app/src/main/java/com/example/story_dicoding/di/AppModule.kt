@@ -4,6 +4,7 @@ import com.example.story_dicoding.model.preferences.SettingPreferences
 import com.example.story_dicoding.model.preferences.dataStore
 import com.example.story_dicoding.model.remote.ApiConfig
 import com.example.story_dicoding.model.remote.ApiService
+import com.example.story_dicoding.viewmodel.AddStoryViewModel
 import com.example.story_dicoding.viewmodel.AuthViewModel
 import com.example.story_dicoding.viewmodel.StoryViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -17,9 +18,6 @@ val appModule = module {
 
     viewModel { AuthViewModel(get(), SettingPreferences.getInstance(androidApplication().dataStore)) }
     viewModel { StoryViewModel(get()) }
-//    viewModel { ThemeViewModel(SettingPreferences.getInstance(androidApplication().dataStore)) }
-//    factory { (username: String) -> RepositoryViewModel(username, get()) }
-//    factory { (username: String) -> DetailViewModel(username, get()) }
-//    factory { FavouriteViewModel(androidApplication()) }
+    viewModel { AddStoryViewModel(get()) }
 
 }
