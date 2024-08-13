@@ -1,7 +1,7 @@
 package com.example.story_dicoding.view.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.story_dicoding.databinding.ActivityListStoryBinding
@@ -28,6 +28,11 @@ class ListStoryActivity : AppCompatActivity() {
 
         storyViewModel.allStory.observe(this) {
             bindRecyclerView(it)
+        }
+
+        binding.fabAddStory.setOnClickListener {
+            val intent = Intent(this, AddStoryActivity::class.java)
+            startActivity(intent)
         }
 
     }

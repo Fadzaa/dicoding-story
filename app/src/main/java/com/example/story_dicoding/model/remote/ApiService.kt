@@ -5,6 +5,8 @@ import com.example.story_dicoding.model.remote.response.AllStoryResponse
 import com.example.story_dicoding.model.remote.response.DetailStoryResponse
 import com.example.story_dicoding.model.remote.response.LoginResponse
 import com.example.story_dicoding.model.remote.response.RegisterResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -25,24 +27,21 @@ interface ApiService {
         @Field("password") password: String
     ): Call<LoginResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("stories")
     fun addStory(
-        @Field("description") description: String,
-        @Field("photo") photo: String,
-        @Field("lat") lat: Float,
-        @Field("lon") lon: Float,
+        @Part("photo") file: MultipartBody.Part,
+        @Part("description") description: RequestBody
 
     ): Call<AddStoryResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @POST("stories/guest")
     fun addStoryGuest(
-        @Field("description") description: String,
-        @Field("photo") photo: String,
-        @Field("lat") lat: Float,
-        @Field("lon") lon: Float,
-
+        @Part file: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: RequestBody,
+        @Part("lon") long: RequestBody,
     ): Call<AddStoryResponse>
 
     @GET("stories")

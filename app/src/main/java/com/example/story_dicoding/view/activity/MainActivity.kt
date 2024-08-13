@@ -2,7 +2,6 @@ package com.example.story_dicoding.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.story_dicoding.databinding.ActivityMainBinding
@@ -20,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-
 
         authViewModel.checkUserTokenPreferences(this)
 
@@ -43,8 +41,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
-
 
     }
 }
