@@ -1,7 +1,10 @@
 package com.example.story_dicoding.view.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.story_dicoding.databinding.ActivityMainBinding
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
 
             authViewModel.loginUser("fattah77@gmail.com", "fattah123").observe(this) { response ->
+
                 if (response != null) {
 
                     Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
@@ -36,12 +40,53 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, ListStoryActivity::class.java)
                     startActivity(intent)
                     finish()
-                } else {
-                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
                 }
+
+
+
             }
 
         }
 
+        binding.tvRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        playAnimation()
+
+    }
+
+    private fun playAnimation() {
+        val logo = ObjectAnimator.ofFloat(binding.ivLogo, View.ALPHA, 1f).setDuration(100)
+        val title = ObjectAnimator.ofFloat(binding.tvHeadingLogin, View.ALPHA, 1f).setDuration(100)
+        val message =
+            ObjectAnimator.ofFloat(binding.tvDescLogin, View.ALPHA, 1f).setDuration(100)
+        val emailTextView =
+            ObjectAnimator.ofFloat(binding.tvLabelEmail, View.ALPHA, 1f).setDuration(100)
+        val emailEditTextLayout =
+            ObjectAnimator.ofFloat(binding.edLoginEmail, View.ALPHA, 1f).setDuration(100)
+        val passwordTextView =
+            ObjectAnimator.ofFloat(binding.tvLabelPassword, View.ALPHA, 1f).setDuration(100)
+        val passwordEditTextLayout =
+            ObjectAnimator.ofFloat(binding.edLoginPassword, View.ALPHA, 1f).setDuration(100)
+        val login = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(100)
+        val navigateRegister = ObjectAnimator.ofFloat(binding.tvNavigateToRegister, View.ALPHA, 1f).setDuration(100)
+        val register = ObjectAnimator.ofFloat(binding.tvRegister, View.ALPHA, 1f).setDuration(100)
+
+        AnimatorSet().apply {
+            playSequentially(
+                logo,
+                title,
+                message,
+                emailTextView,
+                emailEditTextLayout,
+                passwordTextView,
+                passwordEditTextLayout,
+                login,
+                navigateRegister,
+                register
+            )
+            startDelay = 100
+        }.start()
     }
 }

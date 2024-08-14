@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">story_dicoding</string>
+    <string name="login_header">Sign in to your Account</string>
+    <string name="login_description">Please sign in to continue</string>
+    <string name="register_header">Create your Account</string>
+    <string name="register_description">Get started from sign up</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="hint_name">Enter your name</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="to_register">Don’t have account?</string>
+    <string name="to_login">Already have an account?</string>
+    <string name="add_story">Add Story</string>
+    <string name="add_story_header">Add New Story</string>
+    <string name="add_story_description">Describe your story</string>
+    <string name="add_image">Story Image</string>
+    <string name="add_description">Description</string>
+    <string name="post_story">Post Story</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_name">Name</string>
+    <string name="label_story_image">Story Image</string>
+    <string name="label_description">Description</string>
+
+
 </resources>
