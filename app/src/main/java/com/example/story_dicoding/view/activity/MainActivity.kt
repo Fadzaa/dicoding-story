@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
 
             authViewModel.loginUser("fattah77@gmail.com", "fattah123").observe(this) { response ->
+
                 if (response != null) {
 
                     Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
@@ -36,11 +37,16 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, ListStoryActivity::class.java)
                     startActivity(intent)
                     finish()
-                } else {
-                    Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
                 }
+
+
+
             }
 
+        }
+
+        binding.btnNavigateToRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
 
     }

@@ -1,6 +1,8 @@
 package com.example.story_dicoding.model.repository
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.story_dicoding.model.remote.ApiService
@@ -40,7 +42,7 @@ class AuthRepository(private val apiService: ApiService) {
         return registerResponse
     }
 
-    fun loginUser(email: String, password: String) : LiveData<LoginResponse> {
+    fun loginUser(email: String, password: String, context: Context) : LiveData<LoginResponse> {
         val loginResponse = MutableLiveData<LoginResponse>()
 
         apiService.login(
@@ -52,10 +54,12 @@ class AuthRepository(private val apiService: ApiService) {
                 response: Response<LoginResponse>
             ) {
                 if (response.isSuccessful) {
-                    Log.d(TAG, "onResponse: ${response.body().toString()}")
-                    response.body()?.let {
-                        loginResponse.value = it
+                    val responseBody = response.body()
+                    if (responseBody != null && !responseBody.error) {
+                        Toast.makeText(context, responseBody.message, Toast.LENGTH_SHORT).show()
                     }
+                } else {
+                    Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 
