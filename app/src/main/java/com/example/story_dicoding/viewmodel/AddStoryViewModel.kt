@@ -10,6 +10,7 @@ import com.example.story_dicoding.helper.createCustomTempFile
 import com.example.story_dicoding.helper.getImageUri
 import com.example.story_dicoding.helper.reduceFileImage
 import com.example.story_dicoding.model.remote.ApiService
+import com.example.story_dicoding.model.remote.response.AddStoryResponse
 import com.example.story_dicoding.model.repository.StoryRepository
 import java.io.File
 import java.io.FileOutputStream
@@ -34,13 +35,18 @@ class AddStoryViewModel(apiService: ApiService): ViewModel() {
 
 
 
-    fun addStory(description: String, lat: Float, lon: Float, context: Context) {
+    fun addStory(description: String, lat: Float, lon: Float, context: Context): LiveData<AddStoryResponse> {
         _isLoading.value = true
         val fileImage = uriToFile(currentImageUri.value!!, context).reduceFileImage()
-        currentImageUri.observeForever {
-            storyRepository.addStoryGuest(fileImage, description, lat, lon)
+
+        val response = storyRepository.addStoryGuest(fileImage, description, lat, lon)
+
+        response.observeForever {
             _isLoading.value = false
         }
+
+
+        return response
     }
 
     private fun uriToFile(imageUri: Uri, context: Context): File {

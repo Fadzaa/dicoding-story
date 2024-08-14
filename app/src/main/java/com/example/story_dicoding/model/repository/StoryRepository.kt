@@ -74,12 +74,8 @@ class StoryRepository(private val apiService: ApiService) {
         description: String,
         lat: Float,
         lon: Float,
-    ) {
-        if (!file.exists()) {
-            Log.e(TAG, "File does not exist: ${file.path}")
-            return
-        }
-
+    ): LiveData<AddStoryResponse> {
+        val addStoryResponse = MutableLiveData<AddStoryResponse>()
         val descriptionReq = description.toRequestBody("text/plain".toMediaType())
         val latReq = lat.toString().toRequestBody("text/plain".toMediaType())
         val lonReq = lon.toString().toRequestBody("text/plain".toMediaType())
@@ -94,6 +90,9 @@ class StoryRepository(private val apiService: ApiService) {
                     response: Response<AddStoryResponse>
                 ) {
                     if (response.isSuccessful) {
+                        response.body()?.let {
+                            addStoryResponse.value = it
+                        }
                         Log.d(TAG, "onResponse: ${response.body().toString()}")
                     }
                 }
@@ -103,6 +102,8 @@ class StoryRepository(private val apiService: ApiService) {
                 }
             }
         )
+
+        return addStoryResponse
     }
 
 

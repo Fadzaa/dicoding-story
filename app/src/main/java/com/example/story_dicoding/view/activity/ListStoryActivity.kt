@@ -9,6 +9,7 @@ import com.example.story_dicoding.databinding.ActivityListStoryBinding
 import com.example.story_dicoding.helper.setLoading
 import com.example.story_dicoding.model.remote.response.Story
 import com.example.story_dicoding.view.adapter.ListStoryAdapter
+import com.example.story_dicoding.viewmodel.AuthViewModel
 import com.example.story_dicoding.viewmodel.StoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,6 +18,7 @@ class ListStoryActivity : AppCompatActivity() {
     private lateinit var listStoryAdapter: ListStoryAdapter
 
     private val storyViewModel: StoryViewModel by viewModel<StoryViewModel>()
+    private val authViewModel: AuthViewModel by viewModel<AuthViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityListStoryBinding.inflate(layoutInflater)
@@ -39,13 +41,22 @@ class ListStoryActivity : AppCompatActivity() {
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }
 
+        binding.btnLogout.setOnClickListener {
+            authViewModel.logoutUser()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     private fun bindRecyclerView(listStory: List<Story>) {
         with(binding) {
             rvListStory.setHasFixedSize(true)
             rvListStory.layoutManager = LinearLayoutManager(this@ListStoryActivity)
-            rvListStory.adapter = ListStoryAdapter(listStory)
+            listStoryAdapter = ListStoryAdapter(listStory)
+            rvListStory.adapter = listStoryAdapter
         }
     }
 }
