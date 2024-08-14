@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">dicoding_story</string>
+    <string name="register_header">Masuk ke Akun Anda</string>
+    <string name="register_description">Silakan masuk untuk melanjutkan</string>
+    <string name="login_header">Buat Akun Anda</string>
+    <string name="login_description">Mulai dengan mendaftar</string>
+    <string name="hint_email">Masukkan email Anda</string>
+    <string name="hint_name">Masukkan nama Anda</string>
+    <string name="hint_password">Masukkan kata sandi Anda</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="to_register">Belum punya akun? Daftar</string>
+    <string name="to_login">Sudah punya akun? Masuk</string>
+    <string name="add_story">Tambah Cerita</string>
+    <string name="add_story_header">Tambah Cerita Baru</string>
+    <string name="add_story_description">Deskripsikan cerita Anda</string>
+    <string name="add_image">Gambar Cerita</string>
+    <string name="add_description">Deskripsi</string>
+    <string name="post_story">Posting Cerita</string>
+</resources>
