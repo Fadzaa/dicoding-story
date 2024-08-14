@@ -27,6 +27,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_logo"
         android:layout_marginTop="50dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <TextView
@@ -40,6 +42,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_heading_register"
         android:layout_marginTop="10dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <TextView
@@ -53,6 +57,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_desc_register"
         android:layout_marginTop="30dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <com.example.story_dicoding.view.customview.ValidationEditText
@@ -74,7 +80,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_name"
         android:layout_marginTop="10dp"
-
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <TextView
@@ -88,6 +95,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ed_register_name"
         android:layout_marginTop="25dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <com.example.story_dicoding.view.customview.ValidationEditText
@@ -109,6 +118,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_email"
         android:layout_marginTop="10dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <TextView
@@ -122,6 +133,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ed_register_email"
         android:layout_marginTop="25dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <com.example.story_dicoding.view.customview.ValidationEditText
@@ -143,6 +156,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label_password"
         android:layout_marginTop="10dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
 
@@ -161,6 +176,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cl_navigate_to_login"
         android:layout_marginBottom="10dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -183,7 +200,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-
+            android:alpha="0"
+            tools:alpha="100"
             />
 
         <TextView
@@ -198,6 +216,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="5dp"
+            android:alpha="0"
+            tools:alpha="100"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
