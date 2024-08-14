@@ -33,16 +33,18 @@ class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences
         }
     }
 
-    fun loginUser(email: String, password: String, context: Context) {
+    fun loginUser(email: String, password: String): LiveData<LoginResponse> {
         _isLoading.value = true
-        authRepository.loginUser(email, password, context).observeForever {  response ->
+        val loginResponse = authRepository.loginUser(email, password)
 
-                viewModelScope.launch {
-                    pref.saveToken(response.loginResult.token)
-                }
+        loginResponse.observeForever {  response ->
+            viewModelScope.launch {
+                pref.saveToken(response.loginResult.token)
+            }
             _isLoading.value = false
         }
 
+        return loginResponse
     }
     
     fun checkUserTokenPreferences(activity: Activity) {

@@ -42,7 +42,7 @@ class AuthRepository(private val apiService: ApiService) {
         return registerResponse
     }
 
-    fun loginUser(email: String, password: String, context: Context) : LiveData<LoginResponse> {
+    fun loginUser(email: String, password: String) : LiveData<LoginResponse> {
         val loginResponse = MutableLiveData<LoginResponse>()
 
         apiService.login(
@@ -54,12 +54,10 @@ class AuthRepository(private val apiService: ApiService) {
                 response: Response<LoginResponse>
             ) {
                 if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null && !responseBody.error) {
-                        Toast.makeText(context, responseBody.message, Toast.LENGTH_SHORT).show()
+                    Log.d(TAG, "onResponse: ${response.body().toString()}")
+                    response.body()?.let {
+                        loginResponse.value = it
                     }
-                } else {
-                    Toast.makeText(context, response.message(), Toast.LENGTH_SHORT).show()
                 }
             }
 
