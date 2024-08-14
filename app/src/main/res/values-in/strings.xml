@@ -10,12 +10,17 @@
     <string name="hint_password">Masukkan kata sandi Anda</string>
     <string name="login">Masuk</string>
     <string name="register">Daftar</string>
-    <string name="to_register">Belum punya akun? Daftar</string>
-    <string name="to_login">Sudah punya akun? Masuk</string>
+    <string name="to_register">Belum punya akun?</string>
+    <string name="to_login">Sudah punya akun?</string>
     <string name="add_story">Tambah Cerita</string>
     <string name="add_story_header">Tambah Cerita Baru</string>
     <string name="add_story_description">Deskripsikan cerita Anda</string>
     <string name="add_image">Gambar Cerita</string>
     <string name="add_description">Deskripsi</string>
     <string name="post_story">Posting Cerita</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_name">Nama</string>
+    <string name="label_story_image">Gambar Cerita</string>
+    <string name="label_description">Deskripsi</string>
 </resources>
