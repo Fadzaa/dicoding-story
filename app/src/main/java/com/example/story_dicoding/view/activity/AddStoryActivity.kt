@@ -1,12 +1,15 @@
 package com.example.story_dicoding.view.activity
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.story_dicoding.databinding.ActivityAddStoryBinding
 import com.example.story_dicoding.helper.getImageUri
+import com.example.story_dicoding.helper.setLoading
 import com.example.story_dicoding.viewmodel.AddStoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,7 +32,21 @@ class AddStoryActivity : AppCompatActivity() {
                 0.3f,
                 0.7f,
                 this
-            )
+            ).observe(this) {
+                it?.let {
+                    Toast.makeText(this, "Story Uploaded", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
+            }
+
+
+        }
+
+        addStoryViewModel.isLoading.observe(this) {
+            binding.progressBarAddStory.setLoading(it)
         }
 
     }
