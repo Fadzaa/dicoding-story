@@ -48,7 +48,7 @@ class StoryBannerWidget : AppWidgetProvider() {
         private const val TOAST_ACTION = "com.example.story_dicoding.TOAST_ACTION"
         const val EXTRA_ITEM = "com.example.story_dicoding.EXTRA_ITEM"
 
-        private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int, ) {
+        private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager, appWidgetId: Int) {
             val intent = Intent(context, StackWidgetService::class.java)
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
             intent.data = intent.toUri(Intent.URI_INTENT_SCHEME).toUri()

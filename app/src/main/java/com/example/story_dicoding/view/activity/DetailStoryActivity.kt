@@ -1,7 +1,9 @@
 package com.example.story_dicoding.view.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.story_dicoding.databinding.ActivityDetailStoryBinding
@@ -39,9 +41,31 @@ class DetailStoryActivity : AppCompatActivity() {
             binding.progressBarDetail.setLoading(it)
         }
 
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
 
+        playAnimation()
 
+    }
 
+    private fun playAnimation() {
+        val back = ObjectAnimator.ofFloat(binding.ivBack, View.ALPHA, 1f).setDuration(100)
+        val header = ObjectAnimator.ofFloat(binding.headerDetailStory, View.ALPHA, 1f).setDuration(100)
+        val image = ObjectAnimator.ofFloat(binding.ivDetailStory, View.ALPHA, 1f).setDuration(100)
+        val name = ObjectAnimator.ofFloat(binding.tvDetailUsername, View.ALPHA, 1f).setDuration(100)
+        val description = ObjectAnimator.ofFloat(binding.tvDetailDescription, View.ALPHA, 1f).setDuration(100)
+
+        AnimatorSet().apply {
+            playSequentially(
+                back,
+                header,
+                image,
+                name,
+                description
+            )
+            startDelay = 100
+        }.start()
     }
 
     companion object {

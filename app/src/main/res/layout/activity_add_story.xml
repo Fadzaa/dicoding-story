@@ -173,7 +173,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:alpha="0"
-        tools:alpha="100"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

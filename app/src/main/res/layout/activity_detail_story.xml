@@ -10,31 +10,70 @@
     >
 
     <ImageView
+        android:id="@+id/iv_back"
+        android:src="@drawable/ic_back"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/header_detail_story"
+        app:layout_constraintBottom_toBottomOf="@id/header_detail_story"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <TextView
+        android:id="@+id/header_detail_story"
+        android:text="@string/detail_story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:fontFamily="@font/urbanist_bold"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="15dp"
+        android:alpha="0"
+        tools:alpha="100"/>
+
+    <ImageView
         android:id="@+id/iv_detail_story"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_detail_story"
+        android:layout_marginTop="10dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <TextView
         android:id="@+id/tv_detail_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black_color"
+        android:textSize="18sp"
+        android:fontFamily="@font/urbanist_bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_detail_story"
         android:layout_marginTop="10dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <TextView
         android:id="@+id/tv_detail_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/grey_color"
+        android:textSize="14sp"
+        android:fontFamily="@font/urbanist_medium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_detail_username"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:alpha="0"
+        tools:alpha="100"
         />
 
     <ProgressBar

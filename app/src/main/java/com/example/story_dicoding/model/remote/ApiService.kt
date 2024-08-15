@@ -30,14 +30,6 @@ interface ApiService {
     @Multipart
     @POST("stories")
     fun addStory(
-        @Part("photo") file: MultipartBody.Part,
-        @Part("description") description: RequestBody
-
-    ): Call<AddStoryResponse>
-
-    @Multipart
-    @POST("stories/guest")
-    fun addStoryGuest(
         @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody,
         @Part("lat") lat: RequestBody,

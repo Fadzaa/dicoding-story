@@ -1,8 +1,6 @@
 package com.example.story_dicoding.model.repository
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.story_dicoding.model.remote.ApiService
@@ -34,7 +32,7 @@ class AuthRepository(private val apiService: ApiService) {
                 }
             }
 
-            override fun onFailure(call: retrofit2.Call<RegisterResponse>, t: Throwable) {
+            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 Log.e(TAG, "onFailure: ${t.message.toString()}")
             }
         })

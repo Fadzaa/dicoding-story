@@ -39,30 +39,27 @@ internal class StackRemoteViewsFactory(private val mContext: Context, settingPre
                         response.body()?.let {
                             for (story in it.listStory) {
                                 mWidgetItems.add(story)
-                                Log.d("StackRemoteViewsFactory", "onResponse: ${story.description}")
                             }
                         }
 
-                        Log.d("StackRemoteViewsFactory", "onResponse: ${mWidgetItems.size}")
                     }
 
                     latch.countDown()
                 }
 
                 override fun onFailure(call: Call<AllStoryResponse>, t: Throwable) {
-                    Log.e("StackRemoteViewsFactory", "onFailure: ${t.message.toString()}")
+                    Log.e(TAG, "onFailure: ${t.message.toString()}")
                     latch.countDown()
                 }
             }
         )
 
         try {
-            latch.await(5, TimeUnit.SECONDS)  // wait max 5 seconds
+            latch.await(5, TimeUnit.SECONDS)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
 
-        Log.d("StackRemoteViewsFactory", "onDataSetChanged: ${mWidgetItems.size}")
     }
 
     override fun onDestroy() {
@@ -81,7 +78,6 @@ internal class StackRemoteViewsFactory(private val mContext: Context, settingPre
         val fillInIntent = Intent()
         fillInIntent.putExtras(extras)
         rv.setOnClickFillInIntent(R.id.image_view, fillInIntent)
-//        rv.setTextViewText(R.id.tv_widget, mWidgetItems[position].description)
         val imageBitmap = Glide.with(mContext)
             .asBitmap()
             .load(mWidgetItems[position].photoUrl)
@@ -89,8 +85,6 @@ internal class StackRemoteViewsFactory(private val mContext: Context, settingPre
             .get()
 
         rv.setImageViewBitmap(R.id.image_view, imageBitmap)
-
-
 
         return rv
     }
@@ -104,4 +98,8 @@ internal class StackRemoteViewsFactory(private val mContext: Context, settingPre
     override fun getItemId(i: Int): Long = 0
 
     override fun hasStableIds(): Boolean = false
+
+    companion object {
+        private const val TAG = "StackRemoteViewsFactory"
+    }
 }

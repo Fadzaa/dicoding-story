@@ -1,17 +1,15 @@
 package com.example.story_dicoding.viewmodel
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.story_dicoding.model.preferences.SettingPreferences
 import com.example.story_dicoding.model.remote.ApiService
-import com.example.story_dicoding.model.remote.ApiState
 import com.example.story_dicoding.model.remote.response.LoginResponse
+import com.example.story_dicoding.model.remote.response.RegisterResponse
 import com.example.story_dicoding.model.repository.AuthRepository
 import com.example.story_dicoding.view.activity.ListStoryActivity
 import kotlinx.coroutines.flow.first
@@ -19,18 +17,19 @@ import kotlinx.coroutines.launch
 
 class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences): ViewModel() {
     private val authRepository = AuthRepository(apiService)
-    
-    private val _isPasswordHidden = MutableLiveData<Boolean>()
-    val isPasswordHidden: LiveData<Boolean> = _isPasswordHidden
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun registerUser(email: String, password: String, name: String) {
+    fun registerUser(email: String, password: String, name: String): LiveData<RegisterResponse> {
         _isLoading.value = true
-        authRepository.registerUser(email, password, name).observeForever { response ->
+        val registerResponse = authRepository.registerUser(email, password, name)
+
+        registerResponse.observeForever {
             _isLoading.value = false
         }
+
+        return registerResponse
     }
 
     fun loginUser(email: String, password: String): LiveData<LoginResponse> {
@@ -53,6 +52,7 @@ class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences
 
             if (token != null) {
                 val intent = Intent(activity, ListStoryActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 activity.startActivity(intent)
             }
         }
@@ -62,14 +62,6 @@ class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences
         viewModelScope.launch {
             pref.removeToken()
         }
-    }
-
-    fun togglePasswordVisibility() {
-        _isPasswordHidden.value = _isPasswordHidden.value?.not() ?: true
-    }
-
-    companion object {
-        private const val TAG = "AuthViewModel"
     }
 
 }
