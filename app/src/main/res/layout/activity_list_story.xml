@@ -7,7 +7,78 @@
     android:layout_height="match_parent"
     tools:context=".view.activity.ListStoryActivity"
     android:padding="20dp"
+    android:background="#FAFAFA"
     >
+    
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <ImageView
+        android:id="@+id/iv_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/logo"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <ImageView
+        android:id="@+id/iv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintEnd_toStartOf="@id/iv_setting"
+        app:layout_constraintTop_toTopOf="@id/iv_setting"
+        app:layout_constraintBottom_toBottomOf="@id/iv_setting"
+        android:layout_marginEnd="15dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_story"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_setting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <Button
+        android:id="@+id/btn_add_story"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_btn"
+        android:text="@string/add_story"
+        android:textColor="@color/base_color"
+        android:fontFamily="@font/urbanist_semibold"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_add"
+        android:drawablePadding="10dp"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
 
     <ProgressBar
         android:id="@+id/progress_bar_home"
@@ -17,47 +88,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
-
-    <Button
-        android:id="@+id/btn_setting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
-
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        app:layout_constraintEnd_toStartOf="@id/btn_setting"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="10dp"
-        />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_list_story"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginTop="10dp"
-        />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_story"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
         />
 
 
