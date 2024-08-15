@@ -23,12 +23,12 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:padding="8dp"
-            android:background="@color/black_color"
+            android:background="@color/primary_color"
             android:text="@string/appwidget_text"
+            android:fontFamily="@font/urbanist_semibold"
             android:textAlignment="center"
             android:textColor="@color/base_color"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <TextView
