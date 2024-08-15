@@ -16,12 +16,15 @@
     <string name="add_story_description">Describe your story</string>
     <string name="add_image">Story Image</string>
     <string name="add_description">Description</string>
-    <string name="post_story">Post Story</string>
+    <string name="upload_story">Upload Story</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
     <string name="label_name">Name</string>
     <string name="label_story_image">Story Image</string>
     <string name="label_description">Description</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
