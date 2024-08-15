@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.story_dicoding.databinding.ActivityAddStoryBinding
-import com.example.story_dicoding.helper.getImageUri
 import com.example.story_dicoding.helper.setLoading
 import com.example.story_dicoding.viewmodel.AddStoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,6 +49,10 @@ class AddStoryActivity : AppCompatActivity() {
 
         addStoryViewModel.isLoading.observe(this) {
             binding.progressBarAddStory.setLoading(it)
+        }
+
+        binding.ivBack.setOnClickListener {
+            finish()
         }
 
         playAnimation()

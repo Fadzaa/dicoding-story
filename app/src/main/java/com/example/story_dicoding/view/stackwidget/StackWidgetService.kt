@@ -1,6 +1,5 @@
 package com.example.story_dicoding.view.stackwidget
 
-import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.widget.RemoteViewsService
 import com.example.story_dicoding.model.preferences.SettingPreferences

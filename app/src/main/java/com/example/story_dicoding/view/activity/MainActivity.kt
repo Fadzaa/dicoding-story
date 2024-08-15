@@ -31,13 +31,17 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener {
 
-            authViewModel.loginUser("fattah77@gmail.com", "fattah123").observe(this) { response ->
+            authViewModel.loginUser(
+                binding.edLoginEmail.text.toString(),
+                binding.edLoginPassword.text.toString()
+                ).observe(this) { response ->
 
                 if (response != null) {
 
                     Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this, ListStoryActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                     finish()
                 }

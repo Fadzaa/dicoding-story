@@ -4,14 +4,11 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.text.InputType
 import android.view.View
-import androidx.activity.enableEdgeToEdge
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.story_dicoding.R
 import com.example.story_dicoding.databinding.ActivityRegisterBinding
+import com.example.story_dicoding.helper.setLoading
 import com.example.story_dicoding.viewmodel.AuthViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,14 +24,24 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             authViewModel.registerUser(
-                binding.edRegisterName.text.toString(),
                 binding.edRegisterEmail.text.toString(),
-                binding.edRegisterPassword.text.toString()
-            )
+                binding.edRegisterPassword.text.toString(),
+                binding.edRegisterName.text.toString(),
+            ).observe(this) { response ->
+                if (response != null) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.tvLogin.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+        }
+
+        authViewModel.isLoading.observe(this) {
+            binding.progressBarRegister.setLoading(it)
         }
 
         playAnimation()

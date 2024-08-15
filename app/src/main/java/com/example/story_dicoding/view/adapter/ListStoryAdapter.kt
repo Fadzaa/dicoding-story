@@ -35,12 +35,12 @@ class ListStoryAdapter(private val listStory: List<Story>) : RecyclerView.Adapte
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ListStoryAdapter.ListViewHolder {
+    ): ListViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_story_vertical, parent, false)
         return ListViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ListStoryAdapter.ListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         holder.bind(listStory[position])
 
         holder.itemView.setOnClickListener {

@@ -83,7 +83,7 @@ class StoryRepository(private val apiService: ApiService) {
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
 
-        apiService.addStoryGuest(imageMultipart,descriptionReq, latReq, lonReq).enqueue(
+        apiService.addStory(imageMultipart,descriptionReq, latReq, lonReq).enqueue(
             object : Callback<AddStoryResponse> {
                 override fun onResponse(
                     call: Call<AddStoryResponse>,

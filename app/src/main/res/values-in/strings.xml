@@ -14,6 +14,7 @@
     <string name="to_login">Sudah punya akun?</string>
     <string name="add_story">Tambah Cerita</string>
     <string name="add_story_header">Tambah Cerita Baru</string>
+    <string name="detail_story">Detail Cerita</string>
     <string name="add_story_description">Deskripsikan cerita Anda</string>
     <string name="add_image">Gambar Cerita</string>
     <string name="add_description">Deskripsi</string>

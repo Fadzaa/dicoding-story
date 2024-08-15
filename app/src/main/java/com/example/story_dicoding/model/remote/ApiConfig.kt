@@ -1,7 +1,6 @@
 package com.example.story_dicoding.model.remote
 
 import com.example.story_dicoding.model.preferences.SettingPreferences
-import de.hdodenhof.circleimageview.BuildConfig
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
