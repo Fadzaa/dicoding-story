@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">dicoding_story</string>
+    <string name="app_name">Dicoding Story</string>
     <string name="register_header">Masuk ke Akun Anda</string>
     <string name="register_description">Silakan masuk untuk melanjutkan</string>
     <string name="login_header">Buat Akun Anda</string>
@@ -26,7 +26,7 @@
     <string name="gallery">Galeri</string>
     <string name="camera">Kamera</string>
 
-    <string name="appwidget_text">EXAMPLE</string>
+    <string name="appwidget_text">Dicoding Story</string>
     <string name="add_widget">Add widget</string>
-    <string name="app_widget_description">This is an app widget description</string>
+    <string name="app_widget_description">List Story terbaru dari Dicoding Story</string>
 </resources>
