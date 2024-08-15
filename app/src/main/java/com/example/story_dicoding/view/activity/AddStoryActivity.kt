@@ -1,9 +1,12 @@
 package com.example.story_dicoding.view.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -49,6 +52,7 @@ class AddStoryActivity : AppCompatActivity() {
             binding.progressBarAddStory.setLoading(it)
         }
 
+        playAnimation()
     }
 
     private fun startGallery() {
@@ -90,7 +94,30 @@ class AddStoryActivity : AppCompatActivity() {
         }
     }
 
+    private fun playAnimation() {
+        val back = ObjectAnimator.ofFloat(binding.ivBack, View.ALPHA, 1f).setDuration(100)
+        val header = ObjectAnimator.ofFloat(binding.headerAddStory, View.ALPHA, 1f).setDuration(100)
+        val labelImage = ObjectAnimator.ofFloat(binding.labelImageStory, View.ALPHA, 1f).setDuration(100)
+        val imageStory = ObjectAnimator.ofFloat(binding.ivAddStory, View.ALPHA, 1f).setDuration(100)
+        val gallery = ObjectAnimator.ofFloat(binding.btnGallery, View.ALPHA, 1f).setDuration(100)
+        val camera = ObjectAnimator.ofFloat(binding.btnCamera, View.ALPHA, 1f).setDuration(100)
+        val labelDescription = ObjectAnimator.ofFloat(binding.labelDescriptionStory, View.ALPHA, 1f).setDuration(100)
+        val description = ObjectAnimator.ofFloat(binding.etDescription, View.ALPHA, 1f).setDuration(100)
+        val upload = ObjectAnimator.ofFloat(binding.btnUpload, View.ALPHA, 1f).setDuration(100)
 
-
-
+        AnimatorSet().apply {
+            playSequentially(
+                back,
+                header,
+                labelImage,
+                imageStory,
+                gallery,
+                camera,
+                labelDescription,
+                description,
+                upload
+            )
+            startDelay = 100
+        }.start()
+    }
 }

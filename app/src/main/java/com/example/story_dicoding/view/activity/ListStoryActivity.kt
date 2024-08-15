@@ -1,8 +1,11 @@
 package com.example.story_dicoding.view.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.story_dicoding.databinding.ActivityListStoryBinding
@@ -33,15 +36,15 @@ class ListStoryActivity : AppCompatActivity() {
             bindRecyclerView(it)
         }
 
-        binding.fabAddStory.setOnClickListener {
+        binding.btnAddStory.setOnClickListener {
             startActivity(Intent(this, AddStoryActivity::class.java))
         }
 
-        binding.btnSetting.setOnClickListener {
+        binding.ivSetting.setOnClickListener {
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }
 
-        binding.btnLogout.setOnClickListener {
+        binding.ivLogout.setOnClickListener {
             authViewModel.logoutUser()
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -49,6 +52,7 @@ class ListStoryActivity : AppCompatActivity() {
             finish()
         }
 
+        playAnimation()
     }
 
     private fun bindRecyclerView(listStory: List<Story>) {
@@ -58,5 +62,24 @@ class ListStoryActivity : AppCompatActivity() {
             listStoryAdapter = ListStoryAdapter(listStory)
             rvListStory.adapter = listStoryAdapter
         }
+    }
+
+    private fun playAnimation() {
+        val logo = ObjectAnimator.ofFloat(binding.logo, View.ALPHA, 1f).setDuration(100)
+        val logout = ObjectAnimator.ofFloat(binding.ivLogout, View.ALPHA, 1f).setDuration(100)
+        val setting = ObjectAnimator.ofFloat(binding.ivSetting, View.ALPHA, 1f).setDuration(100)
+        val listStory = ObjectAnimator.ofFloat(binding.rvListStory, View.ALPHA, 1f).setDuration(100)
+        val addStory = ObjectAnimator.ofFloat(binding.btnAddStory, View.ALPHA, 1f).setDuration(100)
+
+        AnimatorSet().apply {
+            playSequentially(
+                logo,
+                logout,
+                setting,
+                listStory,
+                addStory
+            )
+            startDelay = 100
+        }.start()
     }
 }

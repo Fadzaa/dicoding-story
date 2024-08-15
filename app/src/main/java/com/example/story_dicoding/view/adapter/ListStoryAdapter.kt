@@ -1,6 +1,7 @@
 package com.example.story_dicoding.view.adapter
 
 import android.content.Intent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,8 +22,11 @@ class ListStoryAdapter(private val listStory: List<Story>) : RecyclerView.Adapte
                     .load(story.photoUrl)
                     .into(ivStory)
 
-                tvStoryName.text = story.name
+                tvName.text = story.name
+                tvDescription.text = story.description
             }
+
+
 
         }
 
@@ -32,7 +36,7 @@ class ListStoryAdapter(private val listStory: List<Story>) : RecyclerView.Adapte
         parent: ViewGroup,
         viewType: Int,
     ): ListStoryAdapter.ListViewHolder {
-        val view = View.inflate(parent.context, R.layout.item_story_vertical, null)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_story_vertical, parent, false)
         return ListViewHolder(view)
     }
 

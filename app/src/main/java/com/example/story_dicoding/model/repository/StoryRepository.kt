@@ -22,7 +22,7 @@ class StoryRepository(private val apiService: ApiService) {
     fun getAllStory(): LiveData<AllStoryResponse> {
         val allStoryResponse = MutableLiveData<AllStoryResponse>()
 
-        apiService.getAllStory(1, 1, 0).enqueue(
+        apiService.getAllStory(1, 10, 0).enqueue(
             object : Callback<AllStoryResponse> {
                 override fun onResponse(
                     call: Call<AllStoryResponse>,

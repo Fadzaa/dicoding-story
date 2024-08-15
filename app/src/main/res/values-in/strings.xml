@@ -17,10 +17,16 @@
     <string name="add_story_description">Deskripsikan cerita Anda</string>
     <string name="add_image">Gambar Cerita</string>
     <string name="add_description">Deskripsi</string>
-    <string name="post_story">Posting Cerita</string>
+    <string name="upload_story">Unggah Cerita</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
     <string name="label_name">Nama</string>
     <string name="label_story_image">Gambar Cerita</string>
     <string name="label_description">Deskripsi</string>
+    <string name="gallery">Galeri</string>
+    <string name="camera">Kamera</string>
+
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 </resources>

@@ -8,6 +8,159 @@
     tools:context=".view.activity.AddStoryActivity"
     android:padding="20dp">
 
+    <ImageView
+        android:id="@+id/iv_back"
+        android:src="@drawable/ic_back"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/header_add_story"
+        app:layout_constraintBottom_toBottomOf="@id/header_add_story"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <TextView
+        android:id="@+id/header_add_story"
+        android:text="@string/add_story_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/primary_color"
+        android:textSize="16sp"
+        android:fontFamily="@font/urbanist_bold"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="15dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <TextView
+        android:id="@+id/label_image_story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_story_image"
+        android:textSize="14sp"
+        android:textColor="@color/primary_color"
+        android:fontFamily="@font/urbanist_semibold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_add_story"
+        android:layout_marginTop="30dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+
+    <ImageView
+        android:id="@+id/iv_add_story"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/upload_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_image_story"
+        android:layout_marginTop="10dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <Button
+        android:id="@+id/btn_gallery"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_btn"
+        android:text="@string/gallery"
+        android:textColor="@color/base_color"
+        android:fontFamily="@font/urbanist_semibold"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_gallery"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_camera"
+        app:layout_constraintTop_toBottomOf="@id/iv_add_story"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <Button
+        android:id="@+id/btn_camera"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_btn"
+        android:text="@string/camera"
+        android:textColor="@color/base_color"
+        android:fontFamily="@font/urbanist_semibold"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:drawableLeft="@drawable/ic_camera"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintStart_toEndOf="@id/btn_gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_add_story"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+    <TextView
+        android:id="@+id/label_description_story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_description"
+        android:textSize="14sp"
+        android:textColor="@color/primary_color"
+        android:fontFamily="@font/urbanist_semibold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_gallery"
+        android:layout_marginTop="20dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+
+
+    <EditText
+        android:id="@+id/et_description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bg_et"
+        android:hint="@string/add_story_description"
+        android:textColorHint="@color/grey_color"
+        android:textSize="12sp"
+        android:textColor="@color/black_color"
+        android:fontFamily="@font/urbanist_regular"
+        android:textAlignment="gravity"
+        android:gravity="top"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/label_description_story"
+        android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp"
+        android:alpha="0"
+        tools:alpha="100"
+        />
+
+
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_btn"
+        android:text="@string/upload_story"
+        android:textColor="@color/base_color"
+        android:fontFamily="@font/urbanist_bold"
+        android:textSize="16sp"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="70dp" />
+
     <ProgressBar
         android:id="@+id/progress_bar_add_story"
         android:layout_width="wrap_content"
@@ -17,56 +170,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:alpha="0"
+        tools:alpha="100"
         />
-
-
-    <ImageView
-        android:id="@+id/iv_add_story"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/et_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_add_story"
-        />
-
-    <Button
-        android:id="@+id/btn_gallery"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Gallery"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_description"
-        android:layout_marginTop="20dp"
-        />
-
-    <Button
-        android:id="@+id/btn_camera"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Camera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_gallery"
-        android:layout_marginTop="20dp" />
-
-
-    <Button
-        android:id="@+id/btn_upload"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="UPLOAD"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_camera"
-        android:layout_marginTop="70dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
