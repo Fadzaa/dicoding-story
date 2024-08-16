@@ -3,6 +3,7 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -49,6 +50,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.play.services.maps)
     val room_version = "2.6.1"
     val retrofit_version = "2.11.0"
     val koin_version = "3.5.6"
