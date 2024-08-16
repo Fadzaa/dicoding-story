@@ -1,7 +1,8 @@
-package com.example.story_dicoding
+package com.example.story_dicoding.view.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.story_dicoding.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

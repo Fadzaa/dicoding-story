@@ -24,16 +24,11 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.btnRegister.setOnClickListener {
             authViewModel.registerUser(
+                binding.edRegisterName.text.toString(),
                 binding.edRegisterEmail.text.toString(),
                 binding.edRegisterPassword.text.toString(),
-                binding.edRegisterName.text.toString(),
-            ).observe(this) { response ->
-                if (response != null) {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
-                }
-            }
+                this
+            )
         }
 
         binding.tvLogin.setOnClickListener {
@@ -42,6 +37,10 @@ class RegisterActivity : AppCompatActivity() {
 
         authViewModel.isLoading.observe(this) {
             binding.progressBarRegister.setLoading(it)
+        }
+
+        authViewModel.errorMessage.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
         playAnimation()

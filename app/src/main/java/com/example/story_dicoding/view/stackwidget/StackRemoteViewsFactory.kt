@@ -28,31 +28,31 @@ internal class StackRemoteViewsFactory(private val mContext: Context, settingPre
 
     override fun onDataSetChanged() {
         val latch = CountDownLatch(1)
-
-        apiService.getAllStory(1, 10, 0).enqueue(
-            object : Callback<AllStoryResponse> {
-                override fun onResponse(
-                    call: Call<AllStoryResponse>,
-                    response: Response<AllStoryResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            for (story in it.listStory) {
-                                mWidgetItems.add(story)
-                            }
-                        }
-
-                    }
-
-                    latch.countDown()
-                }
-
-                override fun onFailure(call: Call<AllStoryResponse>, t: Throwable) {
-                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-                    latch.countDown()
-                }
-            }
-        )
+//
+//        apiService.getAllStory(1, 10, 0).enqueue(
+//            object : Callback<AllStoryResponse> {
+//                override fun onResponse(
+//                    call: Call<AllStoryResponse>,
+//                    response: Response<AllStoryResponse>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        response.body()?.let {
+//                            for (story in it.listStory) {
+//                                mWidgetItems.add(story)
+//                            }
+//                        }
+//
+//                    }
+//
+//                    latch.countDown()
+//                }
+//
+//                override fun onFailure(call: Call<AllStoryResponse>, t: Throwable) {
+//                    Log.e(TAG, "onFailure: ${t.message.toString()}")
+//                    latch.countDown()
+//                }
+//            }
+//        )
 
         try {
             latch.await(5, TimeUnit.SECONDS)

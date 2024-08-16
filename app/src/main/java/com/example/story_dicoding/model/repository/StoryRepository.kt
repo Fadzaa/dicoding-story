@@ -19,63 +19,17 @@ import java.io.File
 
 class StoryRepository(private val apiService: ApiService) {
 
-    fun getAllStory(): LiveData<AllStoryResponse> {
-        val allStoryResponse = MutableLiveData<AllStoryResponse>()
+    suspend fun getAllStory(page: Int, size: Int, location: Int): Response<AllStoryResponse> = apiService.getAllStory(page, size, location)
 
-        apiService.getAllStory(1, 10, 0).enqueue(
-            object : Callback<AllStoryResponse> {
-                override fun onResponse(
-                    call: Call<AllStoryResponse>,
-                    response: Response<AllStoryResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            allStoryResponse.value = it
-                        }
-                    }
-                }
 
-                override fun onFailure(call: Call<AllStoryResponse>, t: Throwable) {
-                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-                }
-            }
-        )
+    suspend fun getStoryById(id: String): Response<DetailStoryResponse> = apiService.getDetailStory(id)
 
-        return allStoryResponse
-    }
-
-    fun getStoryById(id: String): LiveData<DetailStoryResponse> {
-        val detailStoryResponse = MutableLiveData<DetailStoryResponse>()
-
-        apiService.getDetailStory(id).enqueue(
-            object : Callback<DetailStoryResponse> {
-                override fun onResponse(
-                    call: Call<DetailStoryResponse>,
-                    response: Response<DetailStoryResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            detailStoryResponse.value = it
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<DetailStoryResponse>, t: Throwable) {
-                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-                }
-            }
-        )
-
-        return detailStoryResponse
-    }
-
-    fun addStoryGuest(
+    suspend fun addStoryGuest(
         file: File,
         description: String,
         lat: Float,
         lon: Float,
-    ): LiveData<AddStoryResponse> {
-        val addStoryResponse = MutableLiveData<AddStoryResponse>()
+    ): Response<AddStoryResponse> {
         val descriptionReq = description.toRequestBody("text/plain".toMediaType())
         val latReq = lat.toString().toRequestBody("text/plain".toMediaType())
         val lonReq = lon.toString().toRequestBody("text/plain".toMediaType())
@@ -83,31 +37,7 @@ class StoryRepository(private val apiService: ApiService) {
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData("photo", file.name, requestImageFile)
 
-        apiService.addStory(imageMultipart,descriptionReq, latReq, lonReq).enqueue(
-            object : Callback<AddStoryResponse> {
-                override fun onResponse(
-                    call: Call<AddStoryResponse>,
-                    response: Response<AddStoryResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            addStoryResponse.value = it
-                        }
-                        Log.d(TAG, "onResponse: ${response.body().toString()}")
-                    }
-                }
-
-                override fun onFailure(call: Call<AddStoryResponse>, t: Throwable) {
-                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-                }
-            }
-        )
-
-        return addStoryResponse
+        return apiService.addStory(imageMultipart, descriptionReq, latReq, lonReq)
     }
 
-
-    companion object {
-        private const val TAG = "StoryRepository"
-    }
 }

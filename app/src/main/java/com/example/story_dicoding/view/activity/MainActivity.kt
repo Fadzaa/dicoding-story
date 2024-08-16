@@ -29,26 +29,36 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.setLoading(it)
         }
 
-        binding.btnLogin.setOnClickListener {
+        authViewModel.errorMessage.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
 
+        binding.btnLogin.setOnClickListener {
             authViewModel.loginUser(
                 binding.edLoginEmail.text.toString(),
-                binding.edLoginPassword.text.toString()
-                ).observe(this) { response ->
-
-                if (response != null) {
-
-                    Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(this, ListStoryActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }
+                binding.edLoginPassword.text.toString(),
+                this
+            )
 
 
-
-            }
+//            authViewModel.loginUser(
+//                binding.edLoginEmail.text.toString(),
+//                binding.edLoginPassword.text.toString()
+//                ).observe(this) { response ->
+//
+//                if (response != null) {
+//
+//                    Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show()
+//
+//                    val intent = Intent(this, ListStoryActivity::class.java)
+//                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                    startActivity(intent)
+//                    finish()
+//                }
+//
+//
+//
+//            }
 
         }
 
