@@ -19,30 +19,8 @@ import java.io.File
 
 class StoryRepository(private val apiService: ApiService) {
 
-    fun getAllStory(): LiveData<AllStoryResponse> {
-        val allStoryResponse = MutableLiveData<AllStoryResponse>()
+    suspend fun getAllStory(page: Int, size: Int, location: Int): Response<AllStoryResponse> = apiService.getAllStory(page, size, location)
 
-        apiService.getAllStory(1, 10, 0).enqueue(
-            object : Callback<AllStoryResponse> {
-                override fun onResponse(
-                    call: Call<AllStoryResponse>,
-                    response: Response<AllStoryResponse>
-                ) {
-                    if (response.isSuccessful) {
-                        response.body()?.let {
-                            allStoryResponse.value = it
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<AllStoryResponse>, t: Throwable) {
-                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-                }
-            }
-        )
-
-        return allStoryResponse
-    }
 
     fun getStoryById(id: String): LiveData<DetailStoryResponse> {
         val detailStoryResponse = MutableLiveData<DetailStoryResponse>()

@@ -6,9 +6,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.story_dicoding.MapsActivity
 import com.example.story_dicoding.databinding.ActivityListStoryBinding
 import com.example.story_dicoding.helper.setLoading
 import com.example.story_dicoding.model.remote.response.Story
@@ -33,30 +33,16 @@ class ListStoryActivity : AppCompatActivity() {
             binding.progressBarHome.setLoading(it)
         }
 
+        storyViewModel.errorMessage.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        }
+
         storyViewModel.allStory.observe(this) {
             bindRecyclerView(it)
         }
 
-        binding.btnAddStory.setOnClickListener {
-            startActivity(Intent(this, AddStoryActivity::class.java))
-        }
 
-        binding.ivSetting.setOnClickListener {
-            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-        }
-
-        binding.ivMap.setOnClickListener {
-            startActivity(Intent(this, MapsActivity::class.java))
-        }
-
-        binding.ivLogout.setOnClickListener {
-            authViewModel.logoutUser()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
-        }
-
+        bindBtnNavigation()
         playAnimation()
     }
 
@@ -88,5 +74,27 @@ class ListStoryActivity : AppCompatActivity() {
             )
             startDelay = 100
         }.start()
+    }
+
+    private fun bindBtnNavigation() {
+        binding.btnAddStory.setOnClickListener {
+            startActivity(Intent(this, AddStoryActivity::class.java))
+        }
+
+        binding.ivSetting.setOnClickListener {
+            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+        }
+
+        binding.ivMap.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
+        }
+
+        binding.ivLogout.setOnClickListener {
+            authViewModel.logoutUser()
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
 }
