@@ -29,4 +29,5 @@
     <string name="appwidget_text">Dicoding Story</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">Latest story list from Dicoding Story</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

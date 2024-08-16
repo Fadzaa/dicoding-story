@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.story_dicoding.MapsActivity
 import com.example.story_dicoding.databinding.ActivityListStoryBinding
 import com.example.story_dicoding.helper.setLoading
 import com.example.story_dicoding.model.remote.response.Story
@@ -44,6 +45,10 @@ class ListStoryActivity : AppCompatActivity() {
             startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
         }
 
+        binding.ivMap.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
+        }
+
         binding.ivLogout.setOnClickListener {
             authViewModel.logoutUser()
             val intent = Intent(this, MainActivity::class.java)
@@ -68,12 +73,14 @@ class ListStoryActivity : AppCompatActivity() {
         val logo = ObjectAnimator.ofFloat(binding.logo, View.ALPHA, 1f).setDuration(100)
         val logout = ObjectAnimator.ofFloat(binding.ivLogout, View.ALPHA, 1f).setDuration(100)
         val setting = ObjectAnimator.ofFloat(binding.ivSetting, View.ALPHA, 1f).setDuration(100)
+        val map = ObjectAnimator.ofFloat(binding.ivMap, View.ALPHA, 1f).setDuration(100)
         val listStory = ObjectAnimator.ofFloat(binding.rvListStory, View.ALPHA, 1f).setDuration(100)
         val addStory = ObjectAnimator.ofFloat(binding.btnAddStory, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
             playSequentially(
                 logo,
+                map,
                 logout,
                 setting,
                 listStory,
