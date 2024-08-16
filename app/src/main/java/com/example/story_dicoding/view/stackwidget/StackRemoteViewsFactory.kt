@@ -2,7 +2,6 @@ package com.example.story_dicoding.view.stackwidget
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.core.os.bundleOf
@@ -10,11 +9,9 @@ import com.bumptech.glide.Glide
 import com.example.story_dicoding.R
 import com.example.story_dicoding.model.preferences.SettingPreferences
 import com.example.story_dicoding.model.remote.ApiConfig
-import com.example.story_dicoding.model.remote.response.AllStoryResponse
 import com.example.story_dicoding.model.remote.response.Story
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
@@ -28,31 +25,19 @@ internal class StackRemoteViewsFactory(private val mContext: Context, settingPre
 
     override fun onDataSetChanged() {
         val latch = CountDownLatch(1)
-//
-//        apiService.getAllStory(1, 10, 0).enqueue(
-//            object : Callback<AllStoryResponse> {
-//                override fun onResponse(
-//                    call: Call<AllStoryResponse>,
-//                    response: Response<AllStoryResponse>
-//                ) {
-//                    if (response.isSuccessful) {
-//                        response.body()?.let {
-//                            for (story in it.listStory) {
-//                                mWidgetItems.add(story)
-//                            }
-//                        }
-//
-//                    }
-//
-//                    latch.countDown()
-//                }
-//
-//                override fun onFailure(call: Call<AllStoryResponse>, t: Throwable) {
-//                    Log.e(TAG, "onFailure: ${t.message.toString()}")
-//                    latch.countDown()
-//                }
-//            }
-//        )
+
+        GlobalScope.launch {
+            val response = apiService.getAllStory(1, 10, 0)
+
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    for (story in it.listStory) {
+                        mWidgetItems.add(story)
+                    }
+                }
+
+            }
+        }
 
         try {
             latch.await(5, TimeUnit.SECONDS)
@@ -99,7 +84,4 @@ internal class StackRemoteViewsFactory(private val mContext: Context, settingPre
 
     override fun hasStableIds(): Boolean = false
 
-    companion object {
-        private const val TAG = "StackRemoteViewsFactory"
-    }
 }

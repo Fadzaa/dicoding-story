@@ -72,6 +72,20 @@
         android:alpha="0"
         tools:alpha="100"
         />
+    
+    <TextView
+        android:id="@+id/tv_empty_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_data"
+        android:textSize="14sp"
+        android:fontFamily="@font/urbanist_medium"
+        android:textColor="@color/black_color"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/rv_list_story"
+        app:layout_constraintEnd_toEndOf="@id/rv_list_story"
+        app:layout_constraintTop_toTopOf="@id/rv_list_story"
+        app:layout_constraintBottom_toBottomOf="@id/rv_list_story"/>
 
     <Button
         android:id="@+id/btn_add_story"

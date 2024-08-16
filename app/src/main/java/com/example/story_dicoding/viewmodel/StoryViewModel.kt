@@ -13,9 +13,7 @@ import org.json.JSONObject
 import retrofit2.Response
 
 
-class StoryViewModel(apiService: ApiService): ViewModel() {
-    private val storyRepository = StoryRepository(apiService)
-
+class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() {
     private val _allStory = MutableLiveData<List<Story>>()
     val allStory: LiveData<List<Story>> = _allStory
 
@@ -27,6 +25,10 @@ class StoryViewModel(apiService: ApiService): ViewModel() {
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> = _errorMessage
+
+    private val _isDataEmpty = MutableLiveData<Boolean>()
+    val isDataEmpty: LiveData<Boolean> = _isDataEmpty
+
 
 
     init {
@@ -40,6 +42,7 @@ class StoryViewModel(apiService: ApiService): ViewModel() {
             if (response.isSuccessful) {
                 _allStory.value = response.body()?.listStory
                 _isLoading.value = false
+                _isDataEmpty.value = response.body()?.listStory.isNullOrEmpty()
             } else {
                 errorResponse(response)
             }

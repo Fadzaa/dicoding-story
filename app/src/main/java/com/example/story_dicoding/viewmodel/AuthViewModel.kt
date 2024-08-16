@@ -17,8 +17,7 @@ import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Response
 
-class AuthViewModel(apiService: ApiService, private val pref: SettingPreferences): ViewModel() {
-    private val authRepository = AuthRepository(apiService)
+class AuthViewModel(private val authRepository: AuthRepository, private val pref: SettingPreferences): ViewModel() {
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading

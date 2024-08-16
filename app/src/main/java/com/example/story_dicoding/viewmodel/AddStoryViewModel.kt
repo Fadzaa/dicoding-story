@@ -22,9 +22,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 
-class AddStoryViewModel(apiService: ApiService): ViewModel() {
-    private val storyRepository = StoryRepository(apiService)
-
+class AddStoryViewModel(private val storyRepository: StoryRepository): ViewModel() {
     private val _currentImageUri = MutableLiveData<Uri?>()
     val currentImageUri: LiveData<Uri?> = _currentImageUri
 
@@ -45,12 +43,13 @@ class AddStoryViewModel(apiService: ApiService): ViewModel() {
 
 
     fun addStory(description: String, lat: Float, lon: Float, activity: Activity) = viewModelScope.launch {
-        _isLoading.value = true
+
         val fileImage = currentImageUri.value?.let { uri ->
             uriToFile(uri, activity).reduceFileImage()
         }
 
         if (fileImage != null) {
+            _isLoading.value = true
             val response = storyRepository.addStory(fileImage, description, lat, lon)
 
             if (response.isSuccessful) {
