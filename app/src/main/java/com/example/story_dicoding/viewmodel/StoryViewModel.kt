@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.story_dicoding.model.remote.response.DetailStoryResponse
 import com.example.story_dicoding.model.remote.response.Story
 import com.example.story_dicoding.model.repository.StoryRepository
@@ -13,8 +15,7 @@ import retrofit2.Response
 
 
 class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() {
-    private val _allStory = MutableLiveData<List<Story>>()
-    val allStory: LiveData<List<Story>> = _allStory
+    val allStory: LiveData<PagingData<Story>> = storyRepository.getAllStory().cachedIn(viewModelScope)
 
     private val _story = MutableLiveData<DetailStoryResponse>()
     val story: LiveData<DetailStoryResponse> = _story
@@ -28,28 +29,6 @@ class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() 
     private val _isDataEmpty = MutableLiveData<Boolean>()
     val isDataEmpty: LiveData<Boolean> = _isDataEmpty
 
-
-
-    init {
-        getAllStory()
-    }
-
-    private fun getAllStory() = viewModelScope.launch {
-        _isLoading.value = true
-
-        storyRepository.getAllStory(1, 10, 0).let { response ->
-            if (response.isSuccessful) {
-                _allStory.value = response.body()?.listStory
-                _isLoading.value = false
-                _isDataEmpty.value = response.body()?.listStory.isNullOrEmpty()
-            } else {
-                errorResponse(response)
-            }
-
-        }
-
-    }
-
     fun getStoryById(id: String) = viewModelScope.launch {
         _isLoading.value = true
 
@@ -58,8 +37,8 @@ class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() 
                 _story.value = response.body()
                 _isLoading.value = false
             } else {
-                _errorMessage.value = response.message()
-                _isLoading.value = false
+
+                errorResponse(response)
             }
         }
     }

@@ -10,9 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.story_dicoding.databinding.ActivityListStoryBinding
-import com.example.story_dicoding.helper.setLoading
-import com.example.story_dicoding.model.remote.response.Story
 import com.example.story_dicoding.view.adapter.ListStoryAdapter
+import com.example.story_dicoding.view.adapter.LoadingStateAdapter
 import com.example.story_dicoding.viewmodel.AuthViewModel
 import com.example.story_dicoding.viewmodel.StoryViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,33 +28,34 @@ class ListStoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        storyViewModel.isLoading.observe(this) {
-            binding.progressBarHome.setLoading(it)
-        }
-
         storyViewModel.errorMessage.observe(this) {
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        }
-
-        storyViewModel.allStory.observe(this) {
-            bindRecyclerView(it)
         }
 
         storyViewModel.isDataEmpty.observe(this) {
             binding.tvEmptyData.visibility = if (it) View.VISIBLE else View.GONE
         }
 
+        bindRecyclerView()
 
         bindBtnNavigation()
         playAnimation()
     }
 
-    private fun bindRecyclerView(listStory: List<Story>) {
+    private fun bindRecyclerView() {
         with(binding) {
             rvListStory.setHasFixedSize(true)
             rvListStory.layoutManager = LinearLayoutManager(this@ListStoryActivity)
-            listStoryAdapter = ListStoryAdapter(listStory)
-            rvListStory.adapter = listStoryAdapter
+            listStoryAdapter = ListStoryAdapter()
+            rvListStory.adapter = listStoryAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    listStoryAdapter.retry()
+                }
+            )
+
+            storyViewModel.allStory.observe(this@ListStoryActivity) {
+                listStoryAdapter.submitData(lifecycle, it)
+            }
         }
     }
 

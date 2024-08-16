@@ -80,5 +80,5 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     implementation("io.insert-koin:koin-android:$koin_version")
-//    ksp("androidx.room:room-compiler:$room_version")
+    implementation(libs.androidx.paging.runtime.ktx)
 }
