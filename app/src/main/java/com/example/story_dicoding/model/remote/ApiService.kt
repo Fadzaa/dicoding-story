@@ -15,18 +15,18 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("register")
-    fun register(
+    suspend fun register(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<RegisterResponse>
+    ): Response<RegisterResponse>
 
     @FormUrlEncoded
     @POST("login")
-    fun login(
+    suspend fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<LoginResponse>
+    ): Response<LoginResponse>
 
     @Multipart
     @POST("stories")
@@ -45,11 +45,8 @@ interface ApiService {
     ): Response<AllStoryResponse>
 
     @GET("stories/{id}")
-    fun getDetailStory(
+    suspend fun getDetailStory(
         @Path("id") id: String,
     ): Call<DetailStoryResponse>
-
-
-
 
 }
