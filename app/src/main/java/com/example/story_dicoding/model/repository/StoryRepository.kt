@@ -1,8 +1,5 @@
 package com.example.story_dicoding.model.repository
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.remote.response.AddStoryResponse
 import com.example.story_dicoding.model.remote.response.AllStoryResponse
@@ -12,8 +9,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
@@ -24,7 +19,7 @@ class StoryRepository(private val apiService: ApiService) {
 
     suspend fun getStoryById(id: String): Response<DetailStoryResponse> = apiService.getDetailStory(id)
 
-    suspend fun addStoryGuest(
+    suspend fun addStory(
         file: File,
         description: String,
         lat: Float,

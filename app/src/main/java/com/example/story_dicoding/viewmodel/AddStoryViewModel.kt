@@ -46,21 +46,28 @@ class AddStoryViewModel(apiService: ApiService): ViewModel() {
 
     fun addStory(description: String, lat: Float, lon: Float, activity: Activity) = viewModelScope.launch {
         _isLoading.value = true
-        val fileImage = uriToFile(currentImageUri.value!!, activity).reduceFileImage()
-
-        val response = storyRepository.addStoryGuest(fileImage, description, lat, lon)
-
-        if (response.isSuccessful) {
-            Toast.makeText(activity, "Story Uploaded", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            activity.startActivity(intent)
-            activity.finish()
-
-            _isLoading.value = false
-        } else {
-            errorResponse(response)
+        val fileImage = currentImageUri.value?.let { uri ->
+            uriToFile(uri, activity).reduceFileImage()
         }
+
+        if (fileImage != null) {
+            val response = storyRepository.addStory(fileImage, description, lat, lon)
+
+            if (response.isSuccessful) {
+                Toast.makeText(activity, "Story Uploaded", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                activity.startActivity(intent)
+                activity.finish()
+
+                _isLoading.value = false
+            } else {
+                errorResponse(response)
+            }
+        } else {
+            _errorMessage.value = "No image selected"
+        }
+
 
     }
 
