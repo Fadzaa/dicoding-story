@@ -9,9 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.story_dicoding.model.preferences.SettingPreferences
-import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.repository.AuthRepository
 import com.example.story_dicoding.view.activity.ListStoryActivity
+import com.example.story_dicoding.view.activity.MainActivity
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.json.JSONObject
@@ -33,7 +33,7 @@ class AuthViewModel(private val authRepository: AuthRepository, private val pref
 
         if (registerResponse.isSuccessful) {
             Toast.makeText(activity, "Register Success", Toast.LENGTH_SHORT).show()
-            activity.startActivity(Intent(activity, ListStoryActivity::class.java))
+            activity.startActivity(Intent(activity, MainActivity::class.java))
             _isLoading.value = false
         } else {
             errorResponse(registerResponse)

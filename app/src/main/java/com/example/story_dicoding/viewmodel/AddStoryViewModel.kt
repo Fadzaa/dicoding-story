@@ -12,7 +12,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.story_dicoding.helper.createCustomTempFile
 import com.example.story_dicoding.helper.getImageUri
 import com.example.story_dicoding.helper.reduceFileImage
-import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.repository.StoryRepository
 import com.example.story_dicoding.view.activity.MainActivity
 import kotlinx.coroutines.launch

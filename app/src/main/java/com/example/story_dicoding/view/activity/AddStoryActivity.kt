@@ -2,7 +2,6 @@ package com.example.story_dicoding.view.activity
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log

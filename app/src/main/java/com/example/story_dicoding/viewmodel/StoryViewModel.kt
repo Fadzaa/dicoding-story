@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.remote.response.DetailStoryResponse
 import com.example.story_dicoding.model.remote.response.Story
 import com.example.story_dicoding.model.repository.StoryRepository
