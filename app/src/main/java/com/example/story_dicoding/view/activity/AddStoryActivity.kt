@@ -30,25 +30,20 @@ class AddStoryActivity : AppCompatActivity() {
 
         binding.btnUpload.setOnClickListener {
             addStoryViewModel.addStory(
-                "Test Upload Story",
+                binding.etDescription.text.toString(),
                 0.3f,
                 0.7f,
                 this
-            ).observe(this) {
-                it?.let {
-                    Toast.makeText(this, "Story Uploaded", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                    finish()
-                }
-            }
-
+            )
 
         }
 
         addStoryViewModel.isLoading.observe(this) {
             binding.progressBarAddStory.setLoading(it)
+        }
+
+        addStoryViewModel.errorMessage.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
         binding.ivBack.setOnClickListener {

@@ -4,6 +4,7 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.story_dicoding.databinding.ActivityDetailStoryBinding
@@ -39,6 +40,10 @@ class DetailStoryActivity : AppCompatActivity() {
 
         storyViewModel.isLoading.observe(this) {
             binding.progressBarDetail.setLoading(it)
+        }
+
+        storyViewModel.errorMessage.observe(this) {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
         binding.ivBack.setOnClickListener {
