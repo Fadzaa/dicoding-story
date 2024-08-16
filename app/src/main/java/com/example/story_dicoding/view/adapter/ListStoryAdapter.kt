@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.story_dicoding.view.activity.DetailStoryActivity
@@ -11,7 +13,7 @@ import com.example.story_dicoding.R
 import com.example.story_dicoding.databinding.ItemStoryVerticalBinding
 import com.example.story_dicoding.model.remote.response.Story
 
-class ListStoryAdapter(private val listStory: List<Story>) : RecyclerView.Adapter<ListStoryAdapter.ListViewHolder>() {
+class ListStoryAdapter :  PagingDataAdapter<Story, ListStoryAdapter.ListViewHolder>(DIFF_CALLBACK) {
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding: ItemStoryVerticalBinding = ItemStoryVerticalBinding.bind(itemView)
 
@@ -41,17 +43,30 @@ class ListStoryAdapter(private val listStory: List<Story>) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listStory[position])
+        val data = getItem(position)
 
-        holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, DetailStoryActivity::class.java)
-            intent.putExtra(DetailStoryActivity.EXTRA_STORY, listStory[position])
-            holder.itemView.context.startActivity(intent)
+        data?.let {
+            holder.bind(it)
+
+            holder.itemView.setOnClickListener {
+                val intent = Intent(holder.itemView.context, DetailStoryActivity::class.java)
+                intent.putExtra(DetailStoryActivity.EXTRA_STORY, data)
+                holder.itemView.context.startActivity(intent)
+            }
         }
+
     }
 
-    override fun getItemCount(): Int {
-        return listStory.size
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Story>() {
+            override fun areItemsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Story, newItem: Story): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
     }
 
 }

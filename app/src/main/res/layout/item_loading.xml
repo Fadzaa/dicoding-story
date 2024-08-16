@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/error_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/urbanist_semibold"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:textColor="@color/primary_color"
+        tools:text="Timeout" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:indeterminate="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/retry_button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_btn"
+        android:layout_gravity="center"
+        android:text="@string/retry"
+        android:fontFamily="@font/urbanist_semibold"
+        android:textSize="16sp"
+        android:textAlignment="center"
+        android:textColor="@color/base_color"
+        android:textAllCaps="false"
+        android:layout_marginTop="15dp"
+        />
+</LinearLayout>

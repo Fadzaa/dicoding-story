@@ -1,9 +1,16 @@
 package com.example.story_dicoding.model.repository
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.example.story_dicoding.model.paging.StoryPagingSource
 import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.remote.response.AddStoryResponse
-import com.example.story_dicoding.model.remote.response.AllStoryResponse
+
 import com.example.story_dicoding.model.remote.response.DetailStoryResponse
+import com.example.story_dicoding.model.remote.response.Story
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -14,7 +21,18 @@ import java.io.File
 
 class StoryRepository(private val apiService: ApiService) {
 
-    suspend fun getAllStory(page: Int, size: Int, location: Int): Response<AllStoryResponse> = apiService.getAllStory(page, size, location)
+    fun getAllStory(): LiveData<PagingData<Story>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5,
+                enablePlaceholders = false
+            ),
+
+            pagingSourceFactory = {
+                StoryPagingSource(apiService)
+            }
+        ).liveData
+    }
 
 
     suspend fun getStoryById(id: String): Response<DetailStoryResponse> = apiService.getDetailStory(id)
