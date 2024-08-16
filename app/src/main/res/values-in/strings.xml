@@ -26,8 +26,11 @@
     <string name="label_description">Deskripsi</string>
     <string name="gallery">Galeri</string>
     <string name="camera">Kamera</string>
+    <string name="empty_data">Data kosong.</string>
+
 
     <string name="appwidget_text">Dicoding Story</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">List Story terbaru dari Dicoding Story</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

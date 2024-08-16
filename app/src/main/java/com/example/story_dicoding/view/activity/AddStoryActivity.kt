@@ -2,7 +2,6 @@ package com.example.story_dicoding.view.activity
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +27,10 @@ class AddStoryActivity : AppCompatActivity() {
         binding.btnGallery.setOnClickListener { startGallery() }
         binding.btnCamera.setOnClickListener { startCamera() }
 
+        addStoryViewModel.isLoading.observe(this) {
+            binding.progressBarAddStory.setLoading(it)
+        }
+
         binding.btnUpload.setOnClickListener {
             addStoryViewModel.addStory(
                 binding.etDescription.text.toString(),
@@ -36,10 +39,6 @@ class AddStoryActivity : AppCompatActivity() {
                 this
             )
 
-        }
-
-        addStoryViewModel.isLoading.observe(this) {
-            binding.progressBarAddStory.setLoading(it)
         }
 
         addStoryViewModel.errorMessage.observe(this) {

@@ -41,6 +41,10 @@ class ListStoryActivity : AppCompatActivity() {
             bindRecyclerView(it)
         }
 
+        storyViewModel.isDataEmpty.observe(this) {
+            binding.tvEmptyData.visibility = if (it) View.VISIBLE else View.GONE
+        }
+
 
         bindBtnNavigation()
         playAnimation()

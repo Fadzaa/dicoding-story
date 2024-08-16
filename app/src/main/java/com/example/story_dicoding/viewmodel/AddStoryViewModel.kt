@@ -12,7 +12,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.story_dicoding.helper.createCustomTempFile
 import com.example.story_dicoding.helper.getImageUri
 import com.example.story_dicoding.helper.reduceFileImage
-import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.repository.StoryRepository
 import com.example.story_dicoding.view.activity.MainActivity
 import kotlinx.coroutines.launch
@@ -22,9 +21,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 
-class AddStoryViewModel(apiService: ApiService): ViewModel() {
-    private val storyRepository = StoryRepository(apiService)
-
+class AddStoryViewModel(private val storyRepository: StoryRepository): ViewModel() {
     private val _currentImageUri = MutableLiveData<Uri?>()
     val currentImageUri: LiveData<Uri?> = _currentImageUri
 
@@ -45,22 +42,30 @@ class AddStoryViewModel(apiService: ApiService): ViewModel() {
 
 
     fun addStory(description: String, lat: Float, lon: Float, activity: Activity) = viewModelScope.launch {
-        _isLoading.value = true
-        val fileImage = uriToFile(currentImageUri.value!!, activity).reduceFileImage()
 
-        val response = storyRepository.addStoryGuest(fileImage, description, lat, lon)
-
-        if (response.isSuccessful) {
-            Toast.makeText(activity, "Story Uploaded", Toast.LENGTH_SHORT).show()
-            val intent = Intent(activity, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            activity.startActivity(intent)
-            activity.finish()
-
-            _isLoading.value = false
-        } else {
-            errorResponse(response)
+        val fileImage = currentImageUri.value?.let { uri ->
+            uriToFile(uri, activity).reduceFileImage()
         }
+
+        if (fileImage != null) {
+            _isLoading.value = true
+            val response = storyRepository.addStory(fileImage, description, lat, lon)
+
+            if (response.isSuccessful) {
+                Toast.makeText(activity, "Story Uploaded", Toast.LENGTH_SHORT).show()
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                activity.startActivity(intent)
+                activity.finish()
+
+                _isLoading.value = false
+            } else {
+                errorResponse(response)
+            }
+        } else {
+            _errorMessage.value = "No image selected"
+        }
+
 
     }
 
