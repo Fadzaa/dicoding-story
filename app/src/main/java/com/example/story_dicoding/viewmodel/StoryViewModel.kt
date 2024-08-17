@@ -19,7 +19,11 @@ class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() 
     val allStory: LiveData<PagingData<Story>> = storyRepository.getAllStory().cachedIn(viewModelScope)
 
     private val _allStoryLocation = MutableLiveData<List<Story>>()
-    val allStoryLocation: LiveData<List<Story>> = _allStoryLocation
+    val allStoryLocation: LiveData<List<Story>> get() {
+        if (_allStoryLocation.value == null) getAllStoryLocation()
+        return _allStoryLocation
+    }
+
 
     private val _story = MutableLiveData<DetailStoryResponse>()
     val story: LiveData<DetailStoryResponse> = _story
@@ -32,11 +36,6 @@ class StoryViewModel(private val storyRepository: StoryRepository): ViewModel() 
 
     private val _isDataEmpty = MutableLiveData<Boolean>()
     val isDataEmpty: LiveData<Boolean> = _isDataEmpty
-
-    init {
-        getAllStoryLocation()
-    }
-
 
     private fun getAllStoryLocation() = viewModelScope.launch {
         _isLoading.value = true
