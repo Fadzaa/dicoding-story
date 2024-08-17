@@ -10,6 +10,7 @@ import com.example.story_dicoding.model.data.StoryRemoteMediator
 import com.example.story_dicoding.model.local.StoryDatabase
 import com.example.story_dicoding.model.remote.ApiService
 import com.example.story_dicoding.model.remote.response.AddStoryResponse
+import com.example.story_dicoding.model.remote.response.AllStoryResponse
 import com.example.story_dicoding.model.remote.response.DetailStoryResponse
 import com.example.story_dicoding.model.remote.response.Story
 import okhttp3.MediaType.Companion.toMediaType
@@ -37,6 +38,8 @@ class StoryRepository(private val apiService: ApiService, private val storyDatab
             }
         ).liveData
     }
+
+    suspend fun getAllStoryLocation(): Response<AllStoryResponse> = apiService.getAllStory(1, 30, 1)
 
 
     suspend fun getStoryById(id: String): Response<DetailStoryResponse> = apiService.getDetailStory(id)
