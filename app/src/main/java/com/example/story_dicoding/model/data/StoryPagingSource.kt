@@ -1,4 +1,4 @@
-package com.example.story_dicoding.model.paging
+package com.example.story_dicoding.model.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

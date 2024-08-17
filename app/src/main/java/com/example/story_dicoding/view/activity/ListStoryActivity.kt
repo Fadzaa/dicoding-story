@@ -36,6 +36,8 @@ class ListStoryActivity : AppCompatActivity() {
             binding.tvEmptyData.visibility = if (it) View.VISIBLE else View.GONE
         }
 
+        binding.rvListStory.layoutManager = LinearLayoutManager(this)
+
         bindRecyclerView()
 
         bindBtnNavigation()
@@ -44,8 +46,6 @@ class ListStoryActivity : AppCompatActivity() {
 
     private fun bindRecyclerView() {
         with(binding) {
-            rvListStory.setHasFixedSize(true)
-            rvListStory.layoutManager = LinearLayoutManager(this@ListStoryActivity)
             listStoryAdapter = ListStoryAdapter()
             rvListStory.adapter = listStoryAdapter.withLoadStateFooter(
                 footer = LoadingStateAdapter {
@@ -64,7 +64,6 @@ class ListStoryActivity : AppCompatActivity() {
         val logout = ObjectAnimator.ofFloat(binding.ivLogout, View.ALPHA, 1f).setDuration(100)
         val setting = ObjectAnimator.ofFloat(binding.ivSetting, View.ALPHA, 1f).setDuration(100)
         val map = ObjectAnimator.ofFloat(binding.ivMap, View.ALPHA, 1f).setDuration(100)
-        val listStory = ObjectAnimator.ofFloat(binding.rvListStory, View.ALPHA, 1f).setDuration(100)
         val addStory = ObjectAnimator.ofFloat(binding.btnAddStory, View.ALPHA, 1f).setDuration(100)
 
         AnimatorSet().apply {
@@ -73,7 +72,6 @@ class ListStoryActivity : AppCompatActivity() {
                 map,
                 logout,
                 setting,
-                listStory,
                 addStory
             )
             startDelay = 100

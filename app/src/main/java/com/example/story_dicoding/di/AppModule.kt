@@ -1,5 +1,6 @@
 package com.example.story_dicoding.di
 
+import com.example.story_dicoding.model.local.StoryDatabase
 import com.example.story_dicoding.model.preferences.SettingPreferences
 import com.example.story_dicoding.model.preferences.dataStore
 import com.example.story_dicoding.model.remote.ApiConfig
@@ -18,7 +19,9 @@ val appModule = module {
         ApiConfig.getApiService(SettingPreferences.getInstance(androidApplication().dataStore))
     }
 
-    single { StoryRepository(get()) }
+    single { StoryDatabase.getDatabase(androidApplication()) }
+
+    single { StoryRepository(get(), get()) }
 
     viewModel { AuthViewModel(AuthRepository(get()), SettingPreferences.getInstance(androidApplication().dataStore)) }
     viewModel { StoryViewModel(get()) }
