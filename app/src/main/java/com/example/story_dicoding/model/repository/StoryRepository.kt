@@ -47,8 +47,8 @@ class StoryRepository(private val apiService: ApiService, private val storyDatab
     suspend fun addStory(
         file: File,
         description: String,
-        lat: Float,
-        lon: Float,
+        lat: Double,
+        lon: Double,
     ): Response<AddStoryResponse> {
         val descriptionReq = description.toRequestBody("text/plain".toMediaType())
         val latReq = lat.toString().toRequestBody("text/plain".toMediaType())

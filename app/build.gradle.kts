@@ -52,6 +52,7 @@ android {
 dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.play.services.location)
     val room_version = "2.6.1"
     val retrofit_version = "2.11.0"
     val koin_version = "3.5.6"

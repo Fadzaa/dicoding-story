@@ -27,6 +27,7 @@
     <string name="camera">Camera</string>
     <string name="empty_data">Data is empty.</string>
     <string name="retry">Try again</string>
+    <string name="current_location">Current Location</string>
 
     <string name="appwidget_text">Dicoding Story</string>
     <string name="add_widget">Add widget</string>
