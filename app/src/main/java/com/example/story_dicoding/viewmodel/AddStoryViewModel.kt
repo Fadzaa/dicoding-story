@@ -41,7 +41,7 @@ class AddStoryViewModel(private val storyRepository: StoryRepository): ViewModel
 
 
 
-    fun addStory(description: String, lat: Float, lon: Float, activity: Activity) = viewModelScope.launch {
+    fun addStory(description: String, lat: Double, lon: Double, activity: Activity) = viewModelScope.launch {
 
         val fileImage = currentImageUri.value?.let { uri ->
             uriToFile(uri, activity).reduceFileImage()

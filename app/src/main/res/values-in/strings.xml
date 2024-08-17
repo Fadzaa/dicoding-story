@@ -28,6 +28,7 @@
     <string name="camera">Kamera</string>
     <string name="empty_data">Data kosong.</string>
     <string name="retry">Coba Lagi</string>
+    <string name="current_location">Lokasi Saat Ini</string>
 
 
     <string name="appwidget_text">Dicoding Story</string>
