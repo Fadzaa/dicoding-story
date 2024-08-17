@@ -48,7 +48,6 @@ class StoryRemoteMediator (
             val responseData = apiService.getAllStory(page, state.config.pageSize)
             val remoteListStory = responseData.body()?.listStory ?: emptyList()
             val endOfPaginationReached = remoteListStory.isEmpty()
-//            val localListStory = remoteListStory.map { mapRemoteToLocal(it) }
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     database.remoteKeysDao().deleteRemoteKeys()
