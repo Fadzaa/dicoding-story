@@ -1,9 +1,8 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -46,11 +45,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-opt-in=kotlin.RequiresOptIn")
     }
 }
 
 dependencies {
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.room.ktx)
     val room_version = "2.6.1"
     val retrofit_version = "2.11.0"
     val koin_version = "3.5.6"
@@ -81,4 +82,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     implementation("io.insert-koin:koin-android:$koin_version")
     implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.room.paging)
+    ksp("androidx.room:room-compiler:$room_version")
 }
