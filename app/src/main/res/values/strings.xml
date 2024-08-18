@@ -33,4 +33,7 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">Latest story list from Dicoding Story</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="validation_password">Password must be at least 8 characters long</string>
+    <string name="validation_email">Invalid email format</string>
+    <string name="detail_image_story">Story Detail Image</string>
 </resources>

@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -9,6 +11,7 @@ android {
     namespace = "com.example.story_dicoding"
     compileSdk = 34
     testOptions.unitTests.isReturnDefaultValues = true
+    testOptions.animationsDisabled = true
 
     defaultConfig {
         applicationId = "com.example.story_dicoding"
@@ -32,12 +35,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-//            buildConfigField("String", "BASE_URL", gradleLocalProperties(rootDir).getProperty("BASE_URL"))
-//            buildConfigField("String", "API_KEY", gradleLocalProperties(rootDir).getProperty("API_KEY"))
+            buildConfigField("String", "BASE_URL", gradleLocalProperties(rootDir, providers).getProperty("BASE_URL"))
         }
         debug {
-//            buildConfigField("String", "BASE_URL", gradleLocalProperties(rootDir).getProperty("BASE_URL"))
-//            buildConfigField("String", "API_KEY", gradleLocalProperties(rootDir).getProperty("API_KEY"))
+            buildConfigField("String", "BASE_URL", gradleLocalProperties(rootDir, providers).getProperty("BASE_URL"))
         }
     }
     compileOptions {
@@ -57,34 +58,49 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+
     implementation(libs.retrofit)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.logging.interceptor)
+
     implementation(libs.glide)
+
     implementation(libs.androidx.activity.ktx)
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
+
     implementation(libs.androidx.datastore.preferences)
+
     implementation(libs.koin.android)
+
     implementation(libs.room.runtime)
-    implementation(libs.androidx.paging.runtime.ktx)
-    implementation(libs.androidx.room.paging)
     implementation(libs.androidx.room.ktx)
     ksp(libs.room.compiler)
-    implementation(libs.play.services.maps)
-    implementation(libs.play.services.location)
+
+    implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.paging.runtime.ktx)
+
+    implementation(libs.androidx.espresso.idling.resource)
+    implementation(libs.androidx.espresso.contrib)
 
     testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.rules)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    androidTestImplementation(libs.androidx.core.testing) //InstantTaskExecutorRule
-    androidTestImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
 
-    testImplementation(libs.androidx.core.testing) // InstantTaskExecutorRule
-    testImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
+
+    testImplementation(libs.androidx.core.testing)
+    testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
+
+
+
+
 }

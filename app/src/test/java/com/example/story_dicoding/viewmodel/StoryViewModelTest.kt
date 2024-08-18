@@ -1,6 +1,5 @@
 package com.example.story_dicoding.viewmodel
 
-import MainDispatcherRule
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +9,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.example.story_dicoding.DataDummy
+import com.example.story_dicoding.MainDispatcherRule
 import com.example.story_dicoding.getOrAwaitValue
 import com.example.story_dicoding.model.remote.response.Story
 import com.example.story_dicoding.model.repository.StoryRepository

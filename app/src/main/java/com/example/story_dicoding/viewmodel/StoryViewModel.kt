@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.story_dicoding.model.remote.response.AllStoryResponse
 import com.example.story_dicoding.model.remote.response.DetailStoryResponse
 import com.example.story_dicoding.model.remote.response.Story
 import com.example.story_dicoding.model.repository.StoryRepository
