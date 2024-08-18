@@ -85,13 +85,4 @@ class StoryRemoteMediator (
         }
     }
 
-//    private fun mapRemoteToLocal(remoteStory: Story): LocalStory {
-//        return LocalStory(
-//            id = remoteStory.id,
-//            description = remoteStory.description,
-//            name = remoteStory.name,
-//            photoUrl = remoteStory.photoUrl
-//        )
-//    }
-
 }

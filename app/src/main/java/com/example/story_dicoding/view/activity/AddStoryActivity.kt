@@ -44,7 +44,6 @@ class AddStoryActivity : AppCompatActivity() {
             } else {
                 latitude = 0.0
                 longitude = 0.0
-                Log.d("Location", "Latitude: $latitude, Longitude: $longitude")
             }
 
         }
@@ -120,8 +119,8 @@ class AddStoryActivity : AppCompatActivity() {
         } else {
             requestPermissionLauncher.launch(
                 arrayOf(
-                    android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
                 )
             )
         }
@@ -134,7 +133,7 @@ class AddStoryActivity : AppCompatActivity() {
     private val launcherGallery = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
 
         if (uri != null) {
-            Log.d("Photo Picker",  "Media selected: $uri") 
+            Log.d("Photo Picker",  "Media selected: $uri")
 
             addStoryViewModel.updateCurrentImageUri(uri)
             showImage()

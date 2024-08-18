@@ -13,7 +13,7 @@ import com.example.story_dicoding.helper.createCustomTempFile
 import com.example.story_dicoding.helper.getImageUri
 import com.example.story_dicoding.helper.reduceFileImage
 import com.example.story_dicoding.model.repository.StoryRepository
-import com.example.story_dicoding.view.activity.MainActivity
+import com.example.story_dicoding.view.activity.ListStoryActivity
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Response
@@ -53,7 +53,7 @@ class AddStoryViewModel(private val storyRepository: StoryRepository): ViewModel
 
             if (response.isSuccessful) {
                 Toast.makeText(activity, "Story Uploaded", Toast.LENGTH_SHORT).show()
-                val intent = Intent(activity, MainActivity::class.java)
+                val intent = Intent(activity, ListStoryActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 activity.startActivity(intent)
                 activity.finish()

@@ -35,4 +35,7 @@
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">List Story terbaru dari Dicoding Story</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="validation_password">Kata sandi harus memiliki setidaknya 8 huruf</string>
+    <string name="validation_email">Format email salah</string>
+    <string name="detail_image_story">Gambar Detail Cerita</string>
 </resources>

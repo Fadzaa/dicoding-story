@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Patterns
 import androidx.appcompat.widget.AppCompatEditText
+import com.example.story_dicoding.R
 
 class ValidationEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -34,13 +35,14 @@ class ValidationEditText @JvmOverloads constructor(
                 when (inputType and InputType.TYPE_MASK_VARIATION) {
                     InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS -> {
                         if (!isValidEmail(input)) {
-                            error = "Invalid email format"
+                            error = context.getString(R.string.validation_email)
                         }
                     }
                     InputType.TYPE_TEXT_VARIATION_PASSWORD,
-                    InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD -> {
+                    InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD,
+                    -> {
                         if (!isValidPassword(input)) {
-                            error = "Password must be at least 8 characters long"
+                            error = context.getString(R.string.validation_password)
                         }
                     }
                 }
